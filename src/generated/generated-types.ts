@@ -16,6 +16,7 @@ export type PokeType =
   | 'DRAGON'
   | 'DARK'
   | 'STEEL'
+  | 'FAIRY'
   | 'NORMAL_FIRE'
   | 'NORMAL_WATER'
   | 'NORMAL_ELECTRIC'
@@ -32,6 +33,7 @@ export type PokeType =
   | 'NORMAL_DRAGON'
   | 'NORMAL_DARK'
   | 'NORMAL_STEEL'
+  | 'NORMAL_FAIRY'
   | 'FIRE_WATER'
   | 'FIRE_ELECTRIC'
   | 'FIRE_GRASS'
@@ -47,6 +49,7 @@ export type PokeType =
   | 'FIRE_DRAGON'
   | 'FIRE_DARK'
   | 'FIRE_STEEL'
+  | 'FIRE_FAIRY'
   | 'WATER_ELECTRIC'
   | 'WATER_GRASS'
   | 'WATER_ICE'
@@ -61,6 +64,7 @@ export type PokeType =
   | 'WATER_DRAGON'
   | 'WATER_DARK'
   | 'WATER_STEEL'
+  | 'WATER_FAIRY'
   | 'ELECTRIC_GRASS'
   | 'ELECTRIC_ICE'
   | 'ELECTRIC_FIGHTING'
@@ -74,6 +78,7 @@ export type PokeType =
   | 'ELECTRIC_DRAGON'
   | 'ELECTRIC_DARK'
   | 'ELECTRIC_STEEL'
+  | 'ELECTRIC_FAIRY'
   | 'GRASS_ICE'
   | 'GRASS_FIGHTING'
   | 'GRASS_POISON'
@@ -86,6 +91,7 @@ export type PokeType =
   | 'GRASS_DRAGON'
   | 'GRASS_DARK'
   | 'GRASS_STEEL'
+  | 'GRASS_FAIRY'
   | 'ICE_FIGHTING'
   | 'ICE_POISON'
   | 'ICE_GROUND'
@@ -97,6 +103,7 @@ export type PokeType =
   | 'ICE_DRAGON'
   | 'ICE_DARK'
   | 'ICE_STEEL'
+  | 'ICE_FAIRY'
   | 'FIGHTING_POISON'
   | 'FIGHTING_GROUND'
   | 'FIGHTING_FLYING'
@@ -107,6 +114,7 @@ export type PokeType =
   | 'FIGHTING_DRAGON'
   | 'FIGHTING_DARK'
   | 'FIGHTING_STEEL'
+  | 'FIGHTING_FAIRY'
   | 'POISON_GROUND'
   | 'POISON_FLYING'
   | 'POISON_PSYCHIC'
@@ -116,6 +124,7 @@ export type PokeType =
   | 'POISON_DRAGON'
   | 'POISON_DARK'
   | 'POISON_STEEL'
+  | 'POISON_FAIRY'
   | 'GROUND_FLYING'
   | 'GROUND_PSYCHIC'
   | 'GROUND_BUG'
@@ -124,6 +133,7 @@ export type PokeType =
   | 'GROUND_DRAGON'
   | 'GROUND_DARK'
   | 'GROUND_STEEL'
+  | 'GROUND_FAIRY'
   | 'FLYING_PSYCHIC'
   | 'FLYING_BUG'
   | 'FLYING_ROCK'
@@ -131,27 +141,35 @@ export type PokeType =
   | 'FLYING_DRAGON'
   | 'FLYING_DARK'
   | 'FLYING_STEEL'
+  | 'FLYING_FAIRY'
   | 'PSYCHIC_BUG'
   | 'PSYCHIC_ROCK'
   | 'PSYCHIC_GHOST'
   | 'PSYCHIC_DRAGON'
   | 'PSYCHIC_DARK'
   | 'PSYCHIC_STEEL'
+  | 'PSYCHIC_FAIRY'
   | 'BUG_ROCK'
   | 'BUG_GHOST'
   | 'BUG_DRAGON'
   | 'BUG_DARK'
   | 'BUG_STEEL'
+  | 'BUG_FAIRY'
   | 'ROCK_GHOST'
   | 'ROCK_DRAGON'
   | 'ROCK_DARK'
   | 'ROCK_STEEL'
+  | 'ROCK_FAIRY'
   | 'GHOST_DRAGON'
   | 'GHOST_DARK'
   | 'GHOST_STEEL'
+  | 'GHOST_FAIRY'
   | 'DRAGON_DARK'
   | 'DRAGON_STEEL'
-  | 'DARK_STEEL';
+  | 'DRAGON_FAIRY'
+  | 'DARK_STEEL'
+  | 'DARK_FAIRY'
+  | 'STEEL_FAIRY';
 
 export type TypeEffectiveness = {
   NORMAL: number;
@@ -171,6 +189,7 @@ export type TypeEffectiveness = {
   DRAGON: number;
   DARK: number;
   STEEL: number;
+  FAIRY: number;
   NORMAL_FIRE: number;
   NORMAL_WATER: number;
   NORMAL_ELECTRIC: number;
@@ -187,6 +206,7 @@ export type TypeEffectiveness = {
   NORMAL_DRAGON: number;
   NORMAL_DARK: number;
   NORMAL_STEEL: number;
+  NORMAL_FAIRY: number;
   FIRE_WATER: number;
   FIRE_ELECTRIC: number;
   FIRE_GRASS: number;
@@ -202,6 +222,7 @@ export type TypeEffectiveness = {
   FIRE_DRAGON: number;
   FIRE_DARK: number;
   FIRE_STEEL: number;
+  FIRE_FAIRY: number;
   WATER_ELECTRIC: number;
   WATER_GRASS: number;
   WATER_ICE: number;
@@ -216,6 +237,7 @@ export type TypeEffectiveness = {
   WATER_DRAGON: number;
   WATER_DARK: number;
   WATER_STEEL: number;
+  WATER_FAIRY: number;
   ELECTRIC_GRASS: number;
   ELECTRIC_ICE: number;
   ELECTRIC_FIGHTING: number;
@@ -229,6 +251,7 @@ export type TypeEffectiveness = {
   ELECTRIC_DRAGON: number;
   ELECTRIC_DARK: number;
   ELECTRIC_STEEL: number;
+  ELECTRIC_FAIRY: number;
   GRASS_ICE: number;
   GRASS_FIGHTING: number;
   GRASS_POISON: number;
@@ -241,6 +264,7 @@ export type TypeEffectiveness = {
   GRASS_DRAGON: number;
   GRASS_DARK: number;
   GRASS_STEEL: number;
+  GRASS_FAIRY: number;
   ICE_FIGHTING: number;
   ICE_POISON: number;
   ICE_GROUND: number;
@@ -252,6 +276,7 @@ export type TypeEffectiveness = {
   ICE_DRAGON: number;
   ICE_DARK: number;
   ICE_STEEL: number;
+  ICE_FAIRY: number;
   FIGHTING_POISON: number;
   FIGHTING_GROUND: number;
   FIGHTING_FLYING: number;
@@ -262,6 +287,7 @@ export type TypeEffectiveness = {
   FIGHTING_DRAGON: number;
   FIGHTING_DARK: number;
   FIGHTING_STEEL: number;
+  FIGHTING_FAIRY: number;
   POISON_GROUND: number;
   POISON_FLYING: number;
   POISON_PSYCHIC: number;
@@ -271,6 +297,7 @@ export type TypeEffectiveness = {
   POISON_DRAGON: number;
   POISON_DARK: number;
   POISON_STEEL: number;
+  POISON_FAIRY: number;
   GROUND_FLYING: number;
   GROUND_PSYCHIC: number;
   GROUND_BUG: number;
@@ -279,6 +306,7 @@ export type TypeEffectiveness = {
   GROUND_DRAGON: number;
   GROUND_DARK: number;
   GROUND_STEEL: number;
+  GROUND_FAIRY: number;
   FLYING_PSYCHIC: number;
   FLYING_BUG: number;
   FLYING_ROCK: number;
@@ -286,27 +314,35 @@ export type TypeEffectiveness = {
   FLYING_DRAGON: number;
   FLYING_DARK: number;
   FLYING_STEEL: number;
+  FLYING_FAIRY: number;
   PSYCHIC_BUG: number;
   PSYCHIC_ROCK: number;
   PSYCHIC_GHOST: number;
   PSYCHIC_DRAGON: number;
   PSYCHIC_DARK: number;
   PSYCHIC_STEEL: number;
+  PSYCHIC_FAIRY: number;
   BUG_ROCK: number;
   BUG_GHOST: number;
   BUG_DRAGON: number;
   BUG_DARK: number;
   BUG_STEEL: number;
+  BUG_FAIRY: number;
   ROCK_GHOST: number;
   ROCK_DRAGON: number;
   ROCK_DARK: number;
   ROCK_STEEL: number;
+  ROCK_FAIRY: number;
   GHOST_DRAGON: number;
   GHOST_DARK: number;
   GHOST_STEEL: number;
+  GHOST_FAIRY: number;
   DRAGON_DARK: number;
   DRAGON_STEEL: number;
+  DRAGON_FAIRY: number;
   DARK_STEEL: number;
+  DARK_FAIRY: number;
+  STEEL_FAIRY: number;
 };
 export type EffectivenessChart = {
   NORMAL: TypeEffectiveness;
@@ -326,4 +362,5 @@ export type EffectivenessChart = {
   DRAGON: TypeEffectiveness;
   DARK: TypeEffectiveness;
   STEEL: TypeEffectiveness;
+  FAIRY: TypeEffectiveness;
 };

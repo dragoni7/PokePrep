@@ -20,6 +20,7 @@ const baseTypes: SingleType[] = [
   'DRAGON',
   'DARK',
   'STEEL',
+  'FAIRY',
 ];
 
 function generatePokeTypes(): string[] {
@@ -54,6 +55,7 @@ function generateTypeChart() {
       DRAGON: 1.0,
       DARK: 1.0,
       STEEL: 0.5,
+      FAIRY: 1.0,
     },
     FIRE: {
       NORMAL: 1.0,
@@ -73,6 +75,7 @@ function generateTypeChart() {
       DRAGON: 0.5,
       DARK: 1.0,
       STEEL: 2.0,
+      FAIRY: 1.0,
     },
     WATER: {
       NORMAL: 1.0,
@@ -92,6 +95,7 @@ function generateTypeChart() {
       DRAGON: 0.5,
       DARK: 1.0,
       STEEL: 1.0,
+      FAIRY: 1.0,
     },
     ELECTRIC: {
       NORMAL: 1.0,
@@ -111,6 +115,7 @@ function generateTypeChart() {
       DRAGON: 0.5,
       DARK: 1.0,
       STEEL: 1.0,
+      FAIRY: 1.0,
     },
     GRASS: {
       NORMAL: 1.0,
@@ -130,6 +135,7 @@ function generateTypeChart() {
       DRAGON: 0.5,
       DARK: 1.0,
       STEEL: 0.5,
+      FAIRY: 1.0,
     },
     ICE: {
       NORMAL: 1.0,
@@ -149,6 +155,7 @@ function generateTypeChart() {
       DRAGON: 2.0,
       DARK: 1.0,
       STEEL: 0.5,
+      FAIRY: 1.0,
     },
     FIGHTING: {
       NORMAL: 2.0,
@@ -168,6 +175,7 @@ function generateTypeChart() {
       DRAGON: 1.0,
       DARK: 2.0,
       STEEL: 2.0,
+      FAIRY: 0.5,
     },
     POISON: {
       NORMAL: 1.0,
@@ -187,6 +195,7 @@ function generateTypeChart() {
       DRAGON: 1.0,
       DARK: 1.0,
       STEEL: 0,
+      FAIRY: 2.0,
     },
     GROUND: {
       NORMAL: 1.0,
@@ -206,6 +215,7 @@ function generateTypeChart() {
       DRAGON: 1.0,
       DARK: 1.0,
       STEEL: 2.0,
+      FAIRY: 1.0,
     },
     FLYING: {
       NORMAL: 1.0,
@@ -225,6 +235,7 @@ function generateTypeChart() {
       DRAGON: 1.0,
       DARK: 1.0,
       STEEL: 0.5,
+      FAIRY: 1.0,
     },
     PSYCHIC: {
       NORMAL: 1.0,
@@ -244,6 +255,7 @@ function generateTypeChart() {
       DRAGON: 1.0,
       DARK: 0,
       STEEL: 0.5,
+      FAIRY: 1.0,
     },
     BUG: {
       NORMAL: 1.0,
@@ -263,6 +275,7 @@ function generateTypeChart() {
       DRAGON: 1.0,
       DARK: 2.0,
       STEEL: 0.5,
+      FAIRY: 0.5,
     },
     ROCK: {
       NORMAL: 1.0,
@@ -282,6 +295,7 @@ function generateTypeChart() {
       DRAGON: 1.0,
       DARK: 1.0,
       STEEL: 0.5,
+      FAIRY: 1.0,
     },
     GHOST: {
       NORMAL: 0,
@@ -300,7 +314,8 @@ function generateTypeChart() {
       GHOST: 2.0,
       DRAGON: 1.0,
       DARK: 0.5,
-      STEEL: 0.5,
+      STEEL: 1.0,
+      FAIRY: 1.0,
     },
     DRAGON: {
       NORMAL: 1.0,
@@ -320,6 +335,7 @@ function generateTypeChart() {
       DRAGON: 2.0,
       DARK: 1.0,
       STEEL: 0.5,
+      FAIRY: 0.0,
     },
     DARK: {
       NORMAL: 1.0,
@@ -338,7 +354,8 @@ function generateTypeChart() {
       GHOST: 2.0,
       DRAGON: 1.0,
       DARK: 0.5,
-      STEEL: 0.5,
+      STEEL: 1.0,
+      FAIRY: 0.5,
     },
     STEEL: {
       NORMAL: 1.0,
@@ -358,6 +375,27 @@ function generateTypeChart() {
       DRAGON: 1.0,
       DARK: 1.0,
       STEEL: 0.5,
+      FAIRY: 2.0,
+    },
+    FAIRY: {
+      NORMAL: 1.0,
+      FIRE: 0.5,
+      WATER: 1.0,
+      ELECTRIC: 1.0,
+      GRASS: 1.0,
+      ICE: 1.0,
+      FIGHTING: 2.0,
+      POISON: 0.5,
+      GROUND: 1.0,
+      FLYING: 1.0,
+      PSYCHIC: 1.0,
+      BUG: 1.0,
+      ROCK: 1.0,
+      GHOST: 1.0,
+      DRAGON: 2.0,
+      DARK: 2.0,
+      STEEL: 0.5,
+      FAIRY: 1.0,
     },
   };
 

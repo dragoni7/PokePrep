@@ -15,4 +15,5 @@ export type SingleType =
   | 'GHOST'
   | 'DRAGON'
   | 'DARK'
-  | 'STEEL';
+  | 'STEEL'
+  | 'FAIRY';

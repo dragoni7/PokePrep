@@ -1,19 +1,19 @@
+import { PokeType } from '@/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Constants } from 'pokenode-ts';
 
 export interface InitialState {
-  type: string[];
+  type: PokeType[];
 }
 
 const initialState: InitialState = {
-  type: [Object.entries(Constants.TYPES).find(([_, value]) => value == Constants.TYPES.NORMAL)![0]],
+  type: ['NORMAL'],
 };
 
 export const typesSlice = createSlice({
   name: 'typesConfig',
   initialState,
   reducers: {
-    updateTypes: (state, action: PayloadAction<string[]>) => {
+    updateTypes: (state, action: PayloadAction<PokeType[]>) => {
       state.type = action.payload;
     },
   },

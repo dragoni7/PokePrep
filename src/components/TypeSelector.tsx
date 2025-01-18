@@ -33,8 +33,10 @@ export default function TypeSelector() {
       target: { value },
     } = event;
 
-    if (value.length <= 2)
-      dispatch(updateTypes(typeof value === 'string' ? value.split(',') : value));
+    if (value.length <= 2) {
+      var types = typeof value === 'string' ? value.split(',') : value;
+      dispatch(updateTypes(types));
+    }
   }
   return (
     <div>

@@ -1,6 +1,6 @@
 import { Box, Container, Stack, styled, Typography } from '@mui/material';
 import { Constants } from 'pokenode-ts';
-import TypeSelector from './TypeSelector';
+import TypeSelector from '../features/TypeCalculator/components/TypeSelector';
 
 const StyledBox = styled('div')(({ theme }) => ({
   alignSelf: 'center',

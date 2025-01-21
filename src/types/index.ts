@@ -20,6 +20,27 @@ export type SingleType =
   | 'STEEL'
   | 'FAIRY';
 
+export type TypeColor = {
+  NORMAL: string;
+  FIRE: string;
+  WATER: string;
+  ELECTRIC: string;
+  GRASS: string;
+  ICE: string;
+  FIGHTING: string;
+  POISON: string;
+  GROUND: string;
+  FLYING: string;
+  PSYCHIC: string;
+  BUG: string;
+  ROCK: string;
+  GHOST: string;
+  DRAGON: string;
+  DARK: string;
+  STEEL: string;
+  FAIRY: string;
+};
+
 export type TypeResults = {
   '0': PokeType[];
   '0.25': PokeType[];

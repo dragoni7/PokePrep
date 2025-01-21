@@ -1,3 +1,5 @@
+import { PokeType } from '@/generated/generated-types';
+
 export type SingleType =
   | 'NORMAL'
   | 'FIRE'
@@ -17,3 +19,12 @@ export type SingleType =
   | 'DARK'
   | 'STEEL'
   | 'FAIRY';
+
+export type TypeResults = {
+  '0': PokeType[];
+  '0.25': PokeType[];
+  '0.5': PokeType[];
+  '1': PokeType[];
+  '2': PokeType[];
+  '4': PokeType[];
+};

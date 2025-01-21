@@ -1,8 +1,8 @@
-import { PokeType } from '@/types';
+import { SingleType } from '@/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface InitialState {
-  type: PokeType[];
+  type: SingleType[];
 }
 
 const initialState: InitialState = {
@@ -13,7 +13,7 @@ export const typesSlice = createSlice({
   name: 'typesConfig',
   initialState,
   reducers: {
-    updateTypes: (state, action: PayloadAction<PokeType[]>) => {
+    updateTypes: (state, action: PayloadAction<SingleType[]>) => {
       state.type = action.payload;
     },
   },

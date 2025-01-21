@@ -1,5 +1,6 @@
 import { RootState } from '@/store';
 import { updateTypes } from '@/store/TypesReducer';
+import { SingleType } from '@/types';
 import {
   Box,
   Chip,
@@ -35,40 +36,38 @@ export default function TypeSelector() {
 
     if (value.length <= 2) {
       var types = typeof value === 'string' ? value.split(',') : value;
-      dispatch(updateTypes(types));
+      dispatch(updateTypes(types as SingleType[]));
     }
   }
   return (
-    <div>
-      <FormControl>
-        <InputLabel id="type-selector-label">Type</InputLabel>
-        <Select
-          labelId="type-selector-label"
-          id="type-selector"
-          multiple
-          value={selectedTypes}
-          onChange={handleChange}
-          input={<OutlinedInput id="select-multiple-chip" label="Type" />}
-          renderValue={(selected) => (
-            <Box sx={{ display: 'flex', gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
-            </Box>
-          )}
-          MenuProps={MenuProps}
-        >
-          {Object.entries(Constants.TYPES).map(([key, value]) =>
-            value !== Constants.TYPES.SHADOW && value !== Constants.TYPES.UNKNOWN ? (
-              <MenuItem key={key} value={key}>
-                {key}
-              </MenuItem>
-            ) : (
-              false
-            )
-          )}
-        </Select>
-      </FormControl>
-    </div>
+    <FormControl>
+      <InputLabel id="type-selector-label">Type</InputLabel>
+      <Select
+        labelId="type-selector-label"
+        id="type-selector"
+        multiple
+        value={selectedTypes}
+        onChange={handleChange}
+        input={<OutlinedInput id="select-multiple-chip" label="Type" />}
+        renderValue={(selected) => (
+          <Box sx={{ display: 'flex', gap: 0.5 }}>
+            {selected.map((value) => (
+              <Chip key={value} label={value} />
+            ))}
+          </Box>
+        )}
+        MenuProps={MenuProps}
+      >
+        {Object.entries(Constants.TYPES).map(([key, value]) =>
+          value !== Constants.TYPES.SHADOW && value !== Constants.TYPES.UNKNOWN ? (
+            <MenuItem key={key} value={key}>
+              {key}
+            </MenuItem>
+          ) : (
+            false
+          )
+        )}
+      </Select>
+    </FormControl>
   );
 }

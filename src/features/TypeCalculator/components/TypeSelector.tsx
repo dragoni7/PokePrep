@@ -1,9 +1,9 @@
+import TypeChip from '@/components/TypeChip';
 import { RootState } from '@/store';
 import { updateTypes } from '@/store/TypesReducer';
 import { SingleType } from '@/types';
 import {
   Box,
-  Chip,
   FormControl,
   InputLabel,
   MenuItem,
@@ -50,9 +50,9 @@ export default function TypeSelector() {
         onChange={handleChange}
         input={<OutlinedInput id="select-multiple-chip" label="Type" />}
         renderValue={(selected) => (
-          <Box sx={{ display: 'flex', gap: 0.5 }}>
+          <Box sx={{ display: 'flex', gap: 0.2 }}>
             {selected.map((value) => (
-              <Chip key={value} label={value} />
+              <TypeChip type={value} />
             ))}
           </Box>
         )}

@@ -1,10 +1,10 @@
 import { RootState } from '@/store';
 import { TypeResults } from '@/types';
-import { Chip, Container, Grid2, Typography } from '@mui/material';
+import { Divider, Grid2, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getDefensiveTypes, getOffensiveTypes } from '../util/type-utils';
-import TypeChip from '@/components/TypeChip';
+import TypeEffectivenessAccordion from './TypeEffectivenessAccordion';
 
 export default function TypeOptimizer() {
   const selectedTypes = useSelector((state: RootState) => state.typesConfig.type);
@@ -33,115 +33,40 @@ export default function TypeOptimizer() {
   }, [selectedTypes]);
 
   return (
-    <Container>
-      <Grid2 container spacing={2} textAlign="center">
+    <>
+      <Grid2 container spacing={0} textAlign="center" mb={5}>
         <Grid2 size={6}>
-          <Typography variant="h3">Defense</Typography>
+          <Typography variant="h3" mb={2}>
+            Defense
+          </Typography>
+          <Divider />
         </Grid2>
         <Grid2 size={6}>
-          <Typography variant="h3">Offense</Typography>
-        </Grid2>
-        <Grid2 size={6}>
-          <Typography variant="h4">Immune</Typography>
-          <Grid2 container spacing={1}>
-            {bestDefense[0].map((entry) => (
-              <Grid2 size={4}>
-                <TypeChip type={entry} />
-              </Grid2>
-            ))}
-          </Grid2>
-          <Typography variant="h4">x0.25</Typography>
-          <Grid2 container spacing={1}>
-            {bestDefense[0.25].map((entry) => (
-              <Grid2 size={4}>
-                <TypeChip type={entry} />
-              </Grid2>
-            ))}
-          </Grid2>
-          <Typography variant="h4">x0.5</Typography>
-          <Grid2 container spacing={1}>
-            {bestDefense[0.5].map((entry) => (
-              <Grid2 size={4}>
-                <TypeChip type={entry} />
-              </Grid2>
-            ))}
-          </Grid2>
-          <Typography variant="h4">x1</Typography>
-          <Grid2 container spacing={1}>
-            {bestDefense[1].map((entry) => (
-              <Grid2 size={4}>
-                <TypeChip type={entry} />
-              </Grid2>
-            ))}
-          </Grid2>
-          <Typography variant="h4">x2</Typography>
-          <Grid2 container spacing={1}>
-            {bestDefense[2].map((entry) => (
-              <Grid2 size={4}>
-                <TypeChip type={entry} />
-              </Grid2>
-            ))}
-          </Grid2>
-          <Typography variant="h4">x4</Typography>
-          <Grid2 container spacing={1}>
-            {bestDefense[4].map((entry) => (
-              <Grid2 size={4}>
-                <TypeChip type={entry} />
-              </Grid2>
-            ))}
-          </Grid2>
-        </Grid2>
-        <Grid2 size={6}>
-          <Typography variant="h4">Immune</Typography>
-          <Grid2 container spacing={1}>
-            {bestOffense[0].map((entry) => (
-              <Grid2 size={4}>
-                <TypeChip type={entry} />
-              </Grid2>
-            ))}
-          </Grid2>
-          <Typography variant="h4">x0.25</Typography>
-          <Grid2 container spacing={1}>
-            {bestOffense[0.25].map((entry) => (
-              <Grid2 size={4}>
-                <TypeChip type={entry} />
-              </Grid2>
-            ))}
-          </Grid2>
-          <Typography variant="h4">x0.5</Typography>
-          <Grid2 container spacing={1}>
-            {bestOffense[0.5].map((entry) => (
-              <Grid2 size={4}>
-                <TypeChip type={entry} />
-              </Grid2>
-            ))}
-          </Grid2>
-          <Typography variant="h4">x1</Typography>
-          <Grid2 container spacing={1}>
-            {bestOffense[1].map((entry) => (
-              <Grid2 size={4}>
-                <TypeChip type={entry} />
-              </Grid2>
-            ))}
-          </Grid2>
-          <Typography variant="h4">x2</Typography>
-          <Grid2 container spacing={1}>
-            {bestOffense[2].map((entry) => (
-              <Grid2 size={4}>
-                <TypeChip type={entry} />
-              </Grid2>
-            ))}
-          </Grid2>
-          <Typography variant="h4">x4</Typography>
-          <Grid2 container spacing={1}>
-            {bestOffense[4].map((entry) => (
-              <Grid2 size={4}>
-                <TypeChip type={entry} />
-              </Grid2>
-            ))}
-          </Grid2>
+          <Typography variant="h3" mb={2}>
+            Offense
+          </Typography>
+          <Divider />
         </Grid2>
       </Grid2>
-    </Container>
+
+      <Grid2 container spacing={8} textAlign="center">
+        <Grid2 size={6}>
+          <TypeEffectivenessAccordion label="Immune" types={bestDefense[0]} />
+          <TypeEffectivenessAccordion label="x0.25" types={bestDefense[0.25]} />
+          <TypeEffectivenessAccordion label="x0.5" types={bestDefense[0.5]} />
+          <TypeEffectivenessAccordion label="x1.0" types={bestDefense[1]} />
+          <TypeEffectivenessAccordion label="x2.0" types={bestDefense[2]} />
+          <TypeEffectivenessAccordion label="x4.0" types={bestDefense[4]} />
+        </Grid2>
+        <Grid2 size={6}>
+          <TypeEffectivenessAccordion label="x4.0" types={bestOffense[4]} />
+          <TypeEffectivenessAccordion label="x2.0" types={bestOffense[2]} />
+          <TypeEffectivenessAccordion label="x1.0" types={bestOffense[1]} />
+          <TypeEffectivenessAccordion label="x0.5" types={bestOffense[0.5]} />
+          <TypeEffectivenessAccordion label="x0.25" types={bestOffense[0.25]} />
+          <TypeEffectivenessAccordion label="Immune" types={bestOffense[0]} />
+        </Grid2>
+      </Grid2>
+    </>
   );
 }

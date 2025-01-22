@@ -9,7 +9,7 @@ export const TYPE_COLORS: TypeColor = {
   ICE: '#96D9D6',
   FIGHTING: '#C22E28',
   POISON: '#A33EA1',
-  GROUND: '#E2BF65',
+  GROUND: '#bf9b3d',
   FLYING: '#A98FF3',
   PSYCHIC: '#F95587',
   BUG: '#A6B91A',

@@ -10,6 +10,7 @@ interface AppThemeProps {
 
 export default function AppTheme(props: AppThemeProps) {
   const { children, themeComponents } = props;
+
   const theme = React.useMemo(() => {
     return createTheme({
       // For more details about CSS variables configuration, see https://mui.com/material-ui/customization/css-theme-variables/configuration/

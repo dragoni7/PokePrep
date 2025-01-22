@@ -21,14 +21,24 @@ export default function TypeChip(props: TypeChipProps) {
       sx={{ backgroundColor: 'darkslategray', borderRadius: 2 }}
     >
       {props.type.split('_').map((t) => (
-        <Chip key={t} label={t} sx={{ backgroundColor: colorFromType(t as SingleType) }} />
+        <Chip
+          key={t}
+          label={t}
+          sx={{
+            backgroundColor: colorFromType(t as SingleType),
+            fontWeight: 600,
+          }}
+        />
       ))}
     </Stack>
   ) : (
     <Chip
       key={props.type}
       label={props.type}
-      sx={{ backgroundColor: colorFromType(props.type as SingleType) }}
+      sx={{
+        backgroundColor: colorFromType(props.type as SingleType),
+        fontWeight: 600,
+      }}
     />
   );
 }

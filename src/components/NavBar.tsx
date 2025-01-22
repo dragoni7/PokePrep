@@ -4,7 +4,6 @@ import {
   Box,
   Button,
   Container,
-  Divider,
   Drawer,
   IconButton,
   MenuItem,
@@ -14,22 +13,19 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { useState } from 'react';
-import ColorModeIconDropdown from '@/theme/ColorModeIconDropdown';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   flexShrink: 0,
-  borderRadius: `calc(${theme.shape.borderRadius}px + 8px)`,
+  borderRadius: `calc(${theme.shape.borderRadius}px + 20px)`,
   backdropFilter: 'blur(24px)',
-  border: '1px solid',
+  border: '6px solid',
   borderColor: theme.palette.divider,
-  backgroundColor: theme.palette.background
-    ? `rgba(${theme.palette.background.default} / 0.4)`
-    : alpha(theme.palette.background, 0.4),
+  backgroundColor: alpha(theme.palette.error.light, 0.5),
   boxShadow: theme.shadows[1],
-  padding: '8px 12px',
+  padding: '4px 6px',
 }));
 
 export default function NavBar() {
@@ -47,45 +43,34 @@ export default function NavBar() {
         boxShadow: 0,
         bgcolor: 'transparent',
         backgroundImage: 'none',
-        mt: 'calc(var(--template-frame-height, 0px) + 28px)',
+        mt: 'calc(var(--template-frame-height, 0px) + 16px)',
       }}
     >
       <Container maxWidth="lg">
         <StyledToolbar variant="dense" disableGutters>
-          <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              px: 0,
+            }}
+          >
             {/* Icon Here */}
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <Button variant="text" color="info" size="small">
-                Features
+                Type Helper
               </Button>
               <Button variant="text" color="info" size="small">
-                Testimonials
+                Pokedex
               </Button>
               <Button variant="text" color="info" size="small">
-                Highlights
-              </Button>
-              <Button variant="text" color="info" size="small">
-                Pricing
-              </Button>
-              <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
-                FAQ
-              </Button>
-              <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
-                Blog
+                Option 3
               </Button>
             </Box>
           </Box>
-          <Box
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              gap: 1,
-              alignItems: 'center',
-            }}
-          >
-            <ColorModeIconDropdown />
-          </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' }, gap: 1 }}>
-            <ColorModeIconDropdown size="medium" />
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
               <MenuIcon />
             </IconButton>
@@ -111,12 +96,9 @@ export default function NavBar() {
                   </IconButton>
                 </Box>
 
-                <MenuItem>Features</MenuItem>
-                <MenuItem>Testimonials</MenuItem>
-                <MenuItem>Highlights</MenuItem>
-                <MenuItem>Pricing</MenuItem>
-                <MenuItem>FAQ</MenuItem>
-                <MenuItem>Blog</MenuItem>
+                <MenuItem>Type Helper</MenuItem>
+                <MenuItem>Pokedex</MenuItem>
+                <MenuItem>Option3</MenuItem>
               </Box>
             </Drawer>
           </Box>

@@ -1,5 +1,5 @@
 import TypeChip from '@/components/TypeChip';
-import { PokeType } from '@/generated/generated-types';
+import { PokeType } from '@/gen/generated-types';
 import { Accordion, AccordionSummary, Typography, AccordionDetails, Grid2 } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useEffect, useState } from 'react';

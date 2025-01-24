@@ -25,3 +25,4 @@ dist-ssr
 
 # large generated data
 ./public/data/
+public/data/pokedex.json

@@ -12,9 +12,6 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateView } from '@/store/ViewReducer';
-import { RootState } from '@/store';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -31,10 +28,6 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
-
-  const view = useSelector((root: RootState) => root.viewConfig.view);
-
-  const dispatch = useDispatch();
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -64,31 +57,13 @@ export default function NavBar() {
           >
             {/* Icon Here */}
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Button
-                variant="text"
-                onClick={() => dispatch(updateView(0))}
-                sx={(theme) => ({
-                  color: view === 0 ? theme.palette.secondary.main : theme.palette.primary.main,
-                })}
-              >
+              <Button variant="text" href="/type-calculator">
                 Type Helper
               </Button>
-              <Button
-                variant="text"
-                onClick={() => dispatch(updateView(1))}
-                sx={(theme) => ({
-                  color: view === 1 ? theme.palette.secondary.main : theme.palette.primary.main,
-                })}
-              >
+              <Button variant="text" href="/pokedex">
                 Pokedex
               </Button>
-              <Button
-                variant="text"
-                onClick={() => dispatch(updateView(2))}
-                sx={(theme) => ({
-                  color: view === 2 ? theme.palette.secondary.main : theme.palette.primary.main,
-                })}
-              >
+              <Button variant="text" href="/team-builder">
                 Team Builder
               </Button>
             </Box>
@@ -119,9 +94,9 @@ export default function NavBar() {
                   </IconButton>
                 </Box>
 
-                <MenuItem>Type Helper</MenuItem>
-                <MenuItem>Pokedex</MenuItem>
-                <MenuItem>Option3</MenuItem>
+                <MenuItem href="/type-calculator">Type Helper</MenuItem>
+                <MenuItem href="/pokedex">Pokedex</MenuItem>
+                <MenuItem href="/team-builder">Team Builder</MenuItem>
               </Box>
             </Drawer>
           </Box>

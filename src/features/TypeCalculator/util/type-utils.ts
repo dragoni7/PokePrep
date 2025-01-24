@@ -1,5 +1,5 @@
-import { TYPE_CHART } from '@/generated/generated-type-chart';
-import { PokeType } from '@/generated/generated-types';
+import { TYPE_CHART } from '@/gen/generated-type-chart';
+import { PokeType } from '@/gen/generated-types';
 import { SingleType, TypeResults } from '@/types';
 
 export function getDefensiveTypes(against: SingleType[]) {

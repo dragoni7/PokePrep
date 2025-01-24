@@ -1,11 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import SinglesReducer from './TypesReducer';
-import ViewReducer from './ViewReducer';
 
 export const store = configureStore({
   reducer: {
     typesConfig: SinglesReducer,
-    viewConfig: ViewReducer,
   },
 });
 

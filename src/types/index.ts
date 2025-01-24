@@ -1,4 +1,4 @@
-import { PokeType } from '@/generated/generated-types';
+import { PokeType } from '@/gen/generated-types';
 
 export type SingleType =
   | 'NORMAL'
@@ -48,4 +48,42 @@ export type TypeResults = {
   '1': PokeType[];
   '2': PokeType[];
   '4': PokeType[];
+};
+
+export type Pokemon = {
+  abilities: any[];
+  forms: any;
+  id: number;
+  moves: any[];
+  name: string;
+  species: any;
+  sprites: {
+    back_default: string;
+    back_female: string;
+    back_shiny: string;
+    back_shiny_female: string;
+    front_default: string;
+    front_female: string;
+    front_shiny: string;
+    front_shiny_female: string;
+  };
+  stats: {
+    hp: number;
+    attack: number;
+    defense: number;
+    special_attack: number;
+    special_defense: number;
+    speed: number;
+  };
+  EV: {
+    hp: number;
+    attack: number;
+    defense: number;
+    special_attack: number;
+    special_defense: number;
+    speed: number;
+  };
+  types: [SingleType, SingleType | undefined];
+  weight: number;
+  height: number;
 };

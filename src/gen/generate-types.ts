@@ -1,34 +1,14 @@
 import { SingleType } from '@/types';
+import { TYPES } from '@/util/types';
 import { promises as fs } from 'fs';
 import path from 'path';
 
-const baseTypes: SingleType[] = [
-  'NORMAL',
-  'FIRE',
-  'WATER',
-  'ELECTRIC',
-  'GRASS',
-  'ICE',
-  'FIGHTING',
-  'POISON',
-  'GROUND',
-  'FLYING',
-  'PSYCHIC',
-  'BUG',
-  'ROCK',
-  'GHOST',
-  'DRAGON',
-  'DARK',
-  'STEEL',
-  'FAIRY',
-];
-
 function generatePokeTypes(): string[] {
   var dualTypes: string[] = [];
-  var results = baseTypes as string[];
-  for (var i = 0; i < baseTypes.length; i++) {
-    for (var j = i + 1; j < baseTypes.length; j++) {
-      dualTypes.push(baseTypes[i] + '_' + baseTypes[j]);
+  var results = TYPES as string[];
+  for (var i = 0; i < TYPES.length; i++) {
+    for (var j = i + 1; j < TYPES.length; j++) {
+      dualTypes.push(TYPES[i] + '_' + TYPES[j]);
     }
   }
 
@@ -400,11 +380,11 @@ function generateTypeChart() {
   };
 
   Object.entries(typeChart).forEach(([_, value]) => {
-    for (var i = 0; i < baseTypes.length; i++) {
-      for (var j = i + 1; j < baseTypes.length; j++) {
-        const v: number = value[baseTypes[i] as SingleType] * value[baseTypes[j] as SingleType];
+    for (var i = 0; i < TYPES.length; i++) {
+      for (var j = i + 1; j < TYPES.length; j++) {
+        const v: number = value[TYPES[i] as SingleType] * value[TYPES[j] as SingleType];
 
-        Object.assign(value, { [baseTypes[i] + '_' + baseTypes[j]]: v });
+        Object.assign(value, { [TYPES[i] + '_' + TYPES[j]]: v });
       }
     }
   });
@@ -432,7 +412,7 @@ fileData += '}\n';
 
 fileData += 'export type EffectivenessChart = {\n';
 
-for (const type of baseTypes) {
+for (const type of TYPES) {
   fileData += type + ': TypeEffectiveness;\n';
 }
 

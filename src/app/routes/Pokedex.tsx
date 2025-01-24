@@ -1,8 +1,9 @@
+import { Pokemon } from '@/types';
 import { Box, Grid2, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-export default function PokeDex() {
-  const [pokedex, setPokedex] = useState(null);
+export const Pokedex = () => {
+  const [pokedex, setPokedex] = useState<Pokemon[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +37,7 @@ export default function PokeDex() {
         sx={{ height: '100%' }}
       >
         {pokedex &&
-          Object.values(pokedex).map((pokemon: any) => (
+          Object.values(pokedex).map((pokemon: Pokemon) => (
             <Grid2
               size={2}
               key={pokemon.name + pokemon.id}
@@ -46,10 +47,7 @@ export default function PokeDex() {
               })}
             >
               <Stack>
-                <img
-                  src={pokemon.sprites ? pokemon.sprites.front_default : ''}
-                  alt={pokemon.name}
-                />
+                <img src={pokemon.sprites.front_default} alt={pokemon.name} />
                 {pokemon.name}
               </Stack>
             </Grid2>
@@ -57,4 +55,4 @@ export default function PokeDex() {
       </Grid2>
     </Box>
   );
-}
+};

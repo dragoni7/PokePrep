@@ -2,6 +2,7 @@ import TypeChip from '@/components/TypeChip';
 import { RootState } from '@/store';
 import { updateTypes } from '@/store/TypesReducer';
 import { SingleType } from '@/types';
+import { TYPES } from '@/util/types';
 import {
   Box,
   FormControl,
@@ -11,7 +12,6 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-import { Constants } from 'pokenode-ts';
 import { useDispatch, useSelector } from 'react-redux';
 
 const ITEM_HEIGHT = 64;
@@ -58,22 +58,18 @@ export default function TypeSelector() {
         )}
         MenuProps={MenuProps}
       >
-        {Object.entries(Constants.TYPES).map(([key, value]) =>
-          value !== Constants.TYPES.SHADOW && value !== Constants.TYPES.UNKNOWN ? (
-            <MenuItem key={key} value={key}>
-              <img
-                src={`/assets/icons/${key.toLocaleLowerCase()}.svg`}
-                width="20px"
-                height="20px"
-                alt={key}
-              />
-              &nbsp;
-              {key}
-            </MenuItem>
-          ) : (
-            false
-          )
-        )}
+        {TYPES.map((type) => (
+          <MenuItem key={type} value={type}>
+            <img
+              src={`/assets/icons/${type.toLocaleLowerCase()}.svg`}
+              width="20px"
+              height="20px"
+              alt={type}
+            />
+            &nbsp;
+            {type}
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );

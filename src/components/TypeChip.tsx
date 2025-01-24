@@ -5,6 +5,7 @@ import { Chip, Stack } from '@mui/material';
 
 interface TypeChipProps {
   type: PokeType;
+  onClick?: () => void;
 }
 
 export default function TypeChip(props: TypeChipProps) {
@@ -15,18 +16,32 @@ export default function TypeChip(props: TypeChipProps) {
   return props.type.includes('_') ? (
     <Stack
       direction="row"
-      spacing={0.3}
+      spacing={0.2}
       alignItems="center"
       justifyContent="center"
-      sx={{ backgroundColor: 'darkslategray', borderRadius: 2 }}
+      sx={(theme) => ({
+        backgroundColor: theme.palette.background.paper,
+        borderRadius: 10,
+        cursor: 'pointer',
+      })}
+      onClick={props.onClick}
     >
       {props.type.split('_').map((t) => (
         <Chip
           key={t}
           label={t}
+          avatar={<img src={`/assets/icons/${t.toLocaleLowerCase()}.svg`} />}
           sx={{
             backgroundColor: colorFromType(t as SingleType),
-            fontWeight: 600,
+            fontWeight: 800,
+            fontSize: {
+              xs: '0.52rem',
+              md: '0.72rem',
+            },
+            height: {
+              xs: 24,
+              md: 32,
+            },
           }}
         />
       ))}
@@ -35,9 +50,21 @@ export default function TypeChip(props: TypeChipProps) {
     <Chip
       key={props.type}
       label={props.type}
+      avatar={<img src={`/assets/icons/${props.type.toLocaleLowerCase()}.svg`} />}
+      onClick={props.onClick}
+      clickable={false}
       sx={{
         backgroundColor: colorFromType(props.type as SingleType),
-        fontWeight: 600,
+        fontWeight: 800,
+        cursor: 'pointer',
+        fontSize: {
+          xs: '0.65rem',
+          md: '0.8rem',
+        },
+        height: {
+          xs: 24,
+          md: 32,
+        },
       }}
     />
   );

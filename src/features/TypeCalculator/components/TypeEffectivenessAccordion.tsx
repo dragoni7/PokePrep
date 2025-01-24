@@ -25,23 +25,27 @@ export default function TypeEffectivenessAccordion(props: TypeEffectivenessAccor
       disabled={props.types.length === 0}
       expanded={expanded === props.label}
       onChange={handleChange(props.label)}
+      sx={{ backdropFilter: 'blur(10px)' }}
     >
       <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
-        <Typography variant="h4">{props.label}</Typography>
+        <Typography variant="h5">{props.label}</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Grid2
           container
-          spacing={1.25}
+          spacing={{ xs: 1, md: 1.25 }}
           sx={{
-            maxHeight: '300px', // Set a fixed height
+            maxHeight: { xs: '200px', md: '300px' },
             overflowY: 'auto', // Enable vertical scrolling
             overflowX: 'hidden', // Hide horizontal scrolling if not needed
           }}
         >
           {props.types.map((entry) => (
-            <Grid2 size={4}>
-              <TypeChip type={entry} />
+            <Grid2
+              size={entry.includes('_') ? { xs: 12, md: 6 } : { xs: 12, md: 3 }}
+              key={`${props.label}_${entry}`}
+            >
+              <TypeChip type={entry} onClick={() => alert('test')} />
             </Grid2>
           ))}
         </Grid2>

@@ -1,5 +1,4 @@
 import {
-  alpha,
   AppBar,
   Box,
   Button,
@@ -13,23 +12,29 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateView } from '@/store/ViewReducer';
+import { RootState } from '@/store';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   flexShrink: 0,
-  borderRadius: `calc(${theme.shape.borderRadius}px + 20px)`,
+  borderRadius: `calc(${theme.shape.borderRadius}px + 2px)`,
   backdropFilter: 'blur(24px)',
-  border: '6px solid',
-  borderColor: theme.palette.divider,
-  backgroundColor: alpha(theme.palette.error.light, 0.5),
+  backgroundColor: theme.palette.primary.surface,
   boxShadow: theme.shadows[1],
   padding: '4px 6px',
+  outline: '4px solid rgba(255, 255, 255, 0.1)',
 }));
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
+
+  const view = useSelector((root: RootState) => root.viewConfig.view);
+
+  const dispatch = useDispatch();
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -59,14 +64,32 @@ export default function NavBar() {
           >
             {/* Icon Here */}
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Button variant="text" color="info" size="small">
+              <Button
+                variant="text"
+                onClick={() => dispatch(updateView(0))}
+                sx={(theme) => ({
+                  color: view === 0 ? theme.palette.secondary.main : theme.palette.primary.main,
+                })}
+              >
                 Type Helper
               </Button>
-              <Button variant="text" color="info" size="small">
+              <Button
+                variant="text"
+                onClick={() => dispatch(updateView(1))}
+                sx={(theme) => ({
+                  color: view === 1 ? theme.palette.secondary.main : theme.palette.primary.main,
+                })}
+              >
                 Pokedex
               </Button>
-              <Button variant="text" color="info" size="small">
-                Option 3
+              <Button
+                variant="text"
+                onClick={() => dispatch(updateView(2))}
+                sx={(theme) => ({
+                  color: view === 2 ? theme.palette.secondary.main : theme.palette.primary.main,
+                })}
+              >
+                Team Builder
               </Button>
             </Box>
           </Box>

@@ -1,34 +1,74 @@
 import * as React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import type { ThemeOptions } from '@mui/material/styles';
-import { colorSchemes, typography, shadows, shape } from './themePrimitives';
 
 interface AppThemeProps {
   children: React.ReactNode;
   themeComponents?: ThemeOptions['components'];
 }
 
-export default function AppTheme(props: AppThemeProps) {
-  const { children, themeComponents } = props;
+declare module '@mui/material/styles' {
+  interface PaletteColor {
+    surface?: string;
+    highlight?: string;
+  }
 
-  const theme = React.useMemo(() => {
-    return createTheme({
-      // For more details about CSS variables configuration, see https://mui.com/material-ui/customization/css-theme-variables/configuration/
-      cssVariables: {
-        colorSchemeSelector: 'data-mui-color-scheme',
-        cssVarPrefix: 'template',
-      },
-      colorSchemes, // Recently added in v6 for building light & dark mode app, see https://mui.com/material-ui/customization/palette/#color-schemes
-      typography,
-      shadows,
-      shape,
-      components: {
-        ...themeComponents,
-      },
-    });
-  }, [themeComponents]);
+  interface SimplePaletteColorOptions {
+    surface?: string;
+    highlight?: string;
+  }
+}
+
+export default function AppTheme(props: AppThemeProps) {
+  const { children } = props;
   return (
-    <ThemeProvider theme={theme} disableTransitionOnChange>
+    <ThemeProvider
+      theme={createTheme({
+        cssVariables: {
+          colorSchemeSelector: 'data-mui-color-scheme',
+        },
+        typography: {
+          fontFamily: 'Cabin',
+        },
+        palette: {
+          mode: 'dark',
+          primary: {
+            main: '#fff',
+            surface: '#0b1c38',
+            highlight: 'rgba(0,0,0,0.1)',
+          },
+          secondary: {
+            main: '#fcdf14',
+          },
+          background: {
+            default: '#0e6a8f',
+            paper: 'rgba(0,0,0,0.45)',
+          },
+          divider: 'rgba(0,0,0,0.1)',
+        },
+        components: {
+          MuiAccordion: {
+            styleOverrides: {
+              root: {
+                borderRadius: 4,
+                '&.Mui-disabled': {
+                  backgroundColor: '#0b1c38',
+                },
+              },
+            },
+          },
+
+          MuiButton: {
+            styleOverrides: {
+              root: {
+                textTransform: 'none',
+              },
+            },
+          },
+        },
+      })}
+      disableTransitionOnChange
+    >
       {children}
     </ThemeProvider>
   );

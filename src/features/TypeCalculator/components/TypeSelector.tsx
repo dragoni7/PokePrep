@@ -14,13 +14,13 @@ import {
 import { Constants } from 'pokenode-ts';
 import { useDispatch, useSelector } from 'react-redux';
 
-const ITEM_HEIGHT = 48;
+const ITEM_HEIGHT = 64;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 100,
+      width: '8%',
     },
   },
 };
@@ -52,7 +52,7 @@ export default function TypeSelector() {
         renderValue={(selected) => (
           <Box sx={{ display: 'flex', gap: 0.2 }}>
             {selected.map((value) => (
-              <TypeChip type={value} />
+              <TypeChip type={value} key={value} />
             ))}
           </Box>
         )}
@@ -61,6 +61,13 @@ export default function TypeSelector() {
         {Object.entries(Constants.TYPES).map(([key, value]) =>
           value !== Constants.TYPES.SHADOW && value !== Constants.TYPES.UNKNOWN ? (
             <MenuItem key={key} value={key}>
+              <img
+                src={`/assets/icons/${key.toLocaleLowerCase()}.svg`}
+                width="20px"
+                height="20px"
+                alt={key}
+              />
+              &nbsp;
               {key}
             </MenuItem>
           ) : (

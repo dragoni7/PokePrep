@@ -13,18 +13,21 @@ export default function Hero(props: HeroProps) {
         flexDirection: 'column',
         alignItems: 'center',
         pt: { xs: 14, sm: 20 },
-        pb: { xs: 8, sm: 12 },
+        pb: { xs: 4, sm: 6 },
         width: '100%',
       }}
     >
       <Typography
         variant="h1"
-        sx={{
+        sx={(theme) => ({
           display: 'flex',
           flexDirection: { xs: 'column', sm: 'row' },
           alignItems: 'center',
           fontSize: 'clamp(3rem, 10vw, 3.5rem)',
-        }}
+          borderRadius: 2,
+          backgroundColor: theme.palette.primary.highlight,
+          p: 2,
+        })}
       >
         I am fighting a &nbsp;
         {props.children}

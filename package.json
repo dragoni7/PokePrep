@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "generate": "npx tsx src/generated/generate.ts",
+    "generate": "npx tsx src/generated/generate-types.ts",
+    "pokedex": "npx tsx src/generated/generate-pokedex.ts",
     "lint": "eslint .",
     "preview": "vite preview"
   },

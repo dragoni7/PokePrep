@@ -1,8 +1,13 @@
 {
   "routes": [
     {
-      "route": "/*",
-      "redirect": "/index.html"
+      "navigationFallback": {
+        "rewrite": "/index.html",
+        "exclude": [
+          "/images/*.{png,jpg,gif}",
+          "/css/*"
+        ]
+      }
     }
   ]
 }

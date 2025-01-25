@@ -23,7 +23,7 @@ export default function Hero(props: HeroProps) {
           display: 'flex',
           flexDirection: { xs: 'column', sm: 'row' },
           alignItems: 'center',
-          fontSize: 'clamp(3rem, 10vw, 3.5rem)',
+          fontSize: { xs: 'clamp(2rem, 10vw, 2.5rem)', md: 'clamp(3rem, 10vw, 3.5rem)' },
           borderRadius: 2,
           backgroundColor: theme.palette.primary.highlight,
           p: 2,

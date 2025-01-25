@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 interface TypeChipProps {
   type: PokeType;
+  interactable?: boolean | false;
   onClick?: () => void;
 }
 
@@ -23,13 +24,18 @@ export default function TypeChip(props: TypeChipProps) {
       alignItems="center"
       justifyContent="center"
       sx={(theme) => ({
-        backgroundColor: theme.palette.background.paper,
+        background: `linear-gradient(${theme.palette.background.paper}, black)`,
+        backgroundSize: '50%',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
         borderRadius: 10,
-        cursor: 'pointer',
+        cursor: props.interactable ? 'pointer' : '',
       })}
       onClick={() => {
-        const split = props.type.split('_');
-        navigate(`/pokedex?type1=${split[0]}&type2=${split[1]}`);
+        if (props.interactable) {
+          const split = props.type.split('_');
+          navigate(`/pokedex?type1=${split[0]}&type2=${split[1]}`);
+        }
       }}
     >
       {props.type.split('_').map((t) => (
@@ -46,7 +52,7 @@ export default function TypeChip(props: TypeChipProps) {
             },
             height: {
               xs: 24,
-              md: 32,
+              md: 30,
             },
           }}
         />
@@ -57,19 +63,23 @@ export default function TypeChip(props: TypeChipProps) {
       key={props.type}
       label={props.type}
       avatar={<img src={`/assets/icons/${props.type.toLocaleLowerCase()}.svg`} />}
-      onClick={() => navigate(`/pokedex?type1=${props.type}`)}
+      onClick={() => {
+        if (props.interactable) {
+          navigate(`/pokedex?type1=${props.type}`);
+        }
+      }}
       clickable={false}
       sx={{
         backgroundColor: colorFromType(props.type as SingleType),
         fontWeight: 800,
-        cursor: 'pointer',
+        cursor: props.interactable ? 'pointer' : '',
         fontSize: {
           xs: '0.65rem',
           md: '0.8rem',
         },
         height: {
           xs: 24,
-          md: 32,
+          md: 30,
         },
       }}
     />

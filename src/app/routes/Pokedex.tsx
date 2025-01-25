@@ -1,3 +1,4 @@
+import TypeChip from '@/components/TypeChip';
 import TypeSelector from '@/features/Types/components/TypeSelector';
 import { Pokemon, SingleType } from '@/types';
 import { Box, Grid2, Pagination, Stack } from '@mui/material';
@@ -95,7 +96,7 @@ export const Pokedex = () => {
       />
       <Grid2
         container
-        spacing={{ xs: 2, md: 6 }}
+        spacing={{ xs: 2, md: 4 }}
         textAlign="center"
         mx={4}
         my={4}
@@ -113,7 +114,7 @@ export const Pokedex = () => {
           )
           .map((pokemon: Pokemon) => (
             <Grid2
-              size={{ xs: 3, md: 2 }}
+              size={{ xs: 4, md: 2 }}
               key={pokemon.name + pokemon.id}
               sx={(theme) => ({
                 backgroundColor: theme.palette.background.paper,
@@ -123,9 +124,11 @@ export const Pokedex = () => {
                 outline: '6px solid rgba(255, 255, 255, 0.1)',
               })}
             >
-              <Stack>
+              <Stack spacing={0.5} px={0.75} pb={0.5} alignItems="stretch">
                 <img src={pokemon.sprites.front_default} alt={pokemon.name} />
                 {pokemon.name}
+                {pokemon.types[0] && <TypeChip type={pokemon.types[0]} />}
+                {pokemon.types[1] ? <TypeChip type={pokemon.types[1]} /> : false}
               </Stack>
             </Grid2>
           ))}

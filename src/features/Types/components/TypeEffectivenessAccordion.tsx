@@ -45,7 +45,7 @@ export default function TypeEffectivenessAccordion(props: TypeEffectivenessAccor
               size={entry.includes('_') ? { xs: 12, md: 6 } : { xs: 12, md: 3 }}
               key={`${props.label}_${entry}`}
             >
-              <TypeChip type={entry} />
+              <TypeChip type={entry} interactable={true} />
             </Grid2>
           ))}
         </Grid2>

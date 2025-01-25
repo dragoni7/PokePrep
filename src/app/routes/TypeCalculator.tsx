@@ -44,7 +44,14 @@ export const TypeCalculator = () => {
       <Hero>
         <TypeSelector />
       </Hero>
-      <Grid2 container spacing={{ xs: 2, md: 6 }} textAlign="center" mx={4} my={4} mb={8}>
+      <Grid2
+        container
+        spacing={{ xs: 1, md: 6 }}
+        textAlign="center"
+        mx={{ xs: 0, md: 4 }}
+        my={4}
+        mb={8}
+      >
         <Grid2 size={6}>
           <Typography
             variant="h4"

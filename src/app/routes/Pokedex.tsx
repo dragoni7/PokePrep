@@ -1,4 +1,4 @@
-import TypeSelector from '@/features/TypeCalculator/components/TypeSelector';
+import TypeSelector from '@/features/Types/components/TypeSelector';
 import { Pokemon, SingleType } from '@/types';
 import { Box, Grid2, Pagination, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
@@ -113,7 +113,7 @@ export const Pokedex = () => {
           )
           .map((pokemon: Pokemon) => (
             <Grid2
-              size={2}
+              size={{ xs: 3, md: 2 }}
               key={pokemon.name + pokemon.id}
               sx={(theme) => ({
                 backgroundColor: theme.palette.background.paper,

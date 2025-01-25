@@ -2,13 +2,10 @@ import { SingleType, TypeResults } from '@/types';
 import { Grid2, Tooltip, Typography } from '@mui/material';
 import { HelpOutline } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
-import {
-  getDefensiveTypes,
-  getOffensiveTypes,
-} from '../../features/TypeCalculator/util/type-utils';
-import TypeEffectivenessAccordion from '../../features/TypeCalculator/components/TypeEffectivenessAccordion';
+import { getDefensiveTypes, getOffensiveTypes } from '../../features/Types/util/type-utils';
+import TypeEffectivenessAccordion from '../../features/Types/components/TypeEffectivenessAccordion';
 import Hero from '@/components/Hero';
-import TypeSelector from '@/features/TypeCalculator/components/TypeSelector';
+import TypeSelector from '@/features/Types/components/TypeSelector';
 import { useSearchParams } from 'react-router-dom';
 
 export const TypeCalculator = () => {

@@ -12,7 +12,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -29,7 +29,6 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -60,7 +59,7 @@ export default function NavBar() {
             {/* Icon Here */}
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <Button variant="text" href="/type-calculator">
-                Type Helper
+                Type Calculator
               </Button>
               <Button variant="text" href="/pokedex">
                 Pokedex
@@ -95,10 +94,21 @@ export default function NavBar() {
                     <CloseRoundedIcon />
                   </IconButton>
                 </Box>
-
-                <MenuItem onClick={() => navigate('/type-calculator')}>Type Helper</MenuItem>
-                <MenuItem onClick={() => navigate('/pokedex')}>Pokedex</MenuItem>
-                <MenuItem onClick={() => navigate('/team-builder')}>Team Builder</MenuItem>
+                <MenuItem>
+                  <Button variant="text" href="/type-calculator">
+                    Type Calculator
+                  </Button>
+                </MenuItem>
+                <MenuItem>
+                  <Button variant="text" href="/pokedex">
+                    Pokedex
+                  </Button>
+                </MenuItem>
+                <MenuItem>
+                  <Button variant="text" href="/team-builder">
+                    Team Builder
+                  </Button>
+                </MenuItem>
               </Box>
             </Drawer>
           </Box>

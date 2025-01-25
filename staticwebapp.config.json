@@ -1,0 +1,36 @@
+{
+  "trailingSlash": "auto",
+  "routes": [
+    {
+      "route": "/",
+      "statusCode": 200
+    },
+    {
+      "route": "/type-calculator",
+      "statusCode": 200
+    },
+    {
+      "route": "/pokedex",
+      "statusCode": 200
+    },
+    {
+      "route": "/team-builder",
+      "statusCode": 200
+    },
+    {
+      "route": "/assets/icons/*",
+      "headers": {
+        "cache-control": "must-revalidate, max-age=15770000"
+      }
+    }
+  ],
+
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/assets/*.{png,jpg,gif}", "/css/*"]
+  },
+  "responseOverrides": {},
+  "mimeTypes": {
+    ".json": "text/json"
+  }
+}

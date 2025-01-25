@@ -10,8 +10,7 @@
       }
     },
     {
-      "route": "/pokedex",
-      "redirect": "/pokedex"
+      "route": "/pokedex"
     },
     {
       "route": "/type-calculator"

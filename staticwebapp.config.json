@@ -8,6 +8,10 @@
           "/css/*"
         ]
       }
+    },
+    {
+      "route": "/pokedex",
+      "redirect": "/pokedex"
     }
   ]
 }

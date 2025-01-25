@@ -13,7 +13,7 @@ export const Pokedex = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('/data/pokedex.json');
+      const response = await fetch('/pokedex.json');
       const jsonData = await response.json();
       setPokedex(Object.values<Pokemon>(jsonData));
 

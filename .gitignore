@@ -24,5 +24,4 @@ dist-ssr
 *.sw?
 
 # large generated data
-./public/data/
-public/data/pokedex.json
+public/pokedex.json

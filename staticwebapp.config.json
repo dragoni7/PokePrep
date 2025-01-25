@@ -12,6 +12,9 @@
     {
       "route": "/pokedex",
       "redirect": "/pokedex"
+    },
+    {
+      "route": "/type-calculator"
     }
   ]
 }

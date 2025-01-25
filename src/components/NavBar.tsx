@@ -12,6 +12,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -28,6 +29,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -94,9 +96,9 @@ export default function NavBar() {
                   </IconButton>
                 </Box>
 
-                <MenuItem href="/type-calculator">Type Helper</MenuItem>
-                <MenuItem href="/pokedex">Pokedex</MenuItem>
-                <MenuItem href="/team-builder">Team Builder</MenuItem>
+                <MenuItem onClick={() => navigate('/type-calculator')}>Type Helper</MenuItem>
+                <MenuItem onClick={() => navigate('/pokedex')}>Pokedex</MenuItem>
+                <MenuItem onClick={() => navigate('/team-builder')}>Team Builder</MenuItem>
               </Box>
             </Drawer>
           </Box>

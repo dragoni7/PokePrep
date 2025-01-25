@@ -85,4 +85,4 @@ for (var i = 0; i < pokedex.length; i++) {
 
 fileData += '\n}';
 
-fs.writeFile(path.resolve(path.join(...['.', 'public', 'data', 'pokedex.json'])), fileData);
+fs.writeFile(path.resolve(path.join(...['.', 'public', 'pokedex.json'])), fileData);

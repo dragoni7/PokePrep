@@ -1,9 +1,7 @@
 import TypeSelector from '@/features/TypeCalculator/components/TypeSelector';
-import { RootState } from '@/store';
 import { Pokemon, SingleType } from '@/types';
 import { Box, Grid2, Pagination, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 
 const ENTRIES_PER_PAGE = 24;
@@ -12,24 +10,34 @@ export const Pokedex = () => {
   const [pokedex, setPokedex] = useState<Pokemon[]>([]);
   const [filteredDex, setFilteredDex] = useState<Pokemon[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const selectedTypes = useSelector((state: RootState) => state.typesConfig.type);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('/data/pokedex.json');
       const jsonData = await response.json();
-      setPokedex(jsonData);
-      setFilteredDex(jsonData);
+      setPokedex(Object.values<Pokemon>(jsonData));
+
+      if (searchParams.has('type1') && searchParams.has('type2')) {
+        setFilteredDex(
+          Object.values<Pokemon>(jsonData).filter(
+            (p) =>
+              p.types.includes(searchParams.get('type1') as SingleType) &&
+              p.types.includes(searchParams.get('type2') as SingleType)
+          )
+        );
+      } else if (searchParams.has('type1')) {
+        setFilteredDex(
+          Object.values<Pokemon>(jsonData).filter((p: any) =>
+            p.types.includes(searchParams.get('type1') as SingleType)
+          )
+        );
+      } else {
+        setFilteredDex(Object.values<Pokemon>(jsonData));
+      }
     };
 
     fetchData();
   }, []);
-
-  useEffect(() => {
-    updateSearchParams('type1', selectedTypes[0]);
-    updateSearchParams('type2', selectedTypes[1]);
-    updateSearchParams('page', 1);
-  }, [selectedTypes]);
 
   useEffect(() => {
     if (searchParams.has('type1') && searchParams.has('type2')) {
@@ -92,33 +100,35 @@ export const Pokedex = () => {
         mx={4}
         my={4}
         mb={8}
-        sx={{ height: '100%' }}
+        sx={{ height: '100%', width: '100%' }}
       >
-        {filteredDex &&
-          Object.values(filteredDex)
-            .slice(
-              searchParams.get('page')
-                ? (Number(searchParams.get('page')) - 1) * ENTRIES_PER_PAGE
-                : 0,
-              searchParams.get('page')
-                ? Number(searchParams.get('page')) * ENTRIES_PER_PAGE
-                : ENTRIES_PER_PAGE
-            )
-            .map((pokemon: Pokemon) => (
-              <Grid2
-                size={2}
-                key={pokemon.name + pokemon.id}
-                sx={(theme) => ({
-                  backgroundColor: theme.palette.background.paper,
-                  borderRadius: 5,
-                })}
-              >
-                <Stack>
-                  <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-                  {pokemon.name}
-                </Stack>
-              </Grid2>
-            ))}
+        {filteredDex
+          .slice(
+            searchParams.get('page')
+              ? (Number(searchParams.get('page')) - 1) * ENTRIES_PER_PAGE
+              : 0,
+            searchParams.get('page')
+              ? Number(searchParams.get('page')) * ENTRIES_PER_PAGE
+              : ENTRIES_PER_PAGE
+          )
+          .map((pokemon: Pokemon) => (
+            <Grid2
+              size={2}
+              key={pokemon.name + pokemon.id}
+              sx={(theme) => ({
+                backgroundColor: theme.palette.background.paper,
+                borderRadius: 5,
+                padding: '2px 3px',
+                backdropFilter: 'blur(24px)',
+                outline: '6px solid rgba(255, 255, 255, 0.1)',
+              })}
+            >
+              <Stack>
+                <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+                {pokemon.name}
+              </Stack>
+            </Grid2>
+          ))}
       </Grid2>
     </Box>
   );

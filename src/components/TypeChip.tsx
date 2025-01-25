@@ -1,7 +1,8 @@
-import { PokeType } from '@/generated/generated-types';
+import { PokeType } from '@/gen/generated-types';
 import { SingleType } from '@/types';
 import { TYPE_COLORS } from '@/util/colors';
 import { Chip, Stack } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 interface TypeChipProps {
   type: PokeType;
@@ -9,6 +10,8 @@ interface TypeChipProps {
 }
 
 export default function TypeChip(props: TypeChipProps) {
+  const navigate = useNavigate();
+
   function colorFromType(type: SingleType) {
     return TYPE_COLORS[type];
   }
@@ -24,7 +27,10 @@ export default function TypeChip(props: TypeChipProps) {
         borderRadius: 10,
         cursor: 'pointer',
       })}
-      onClick={props.onClick}
+      onClick={() => {
+        const split = props.type.split('_');
+        navigate(`/pokedex?type1=${split[0]}&type2=${split[1]}`);
+      }}
     >
       {props.type.split('_').map((t) => (
         <Chip
@@ -51,7 +57,7 @@ export default function TypeChip(props: TypeChipProps) {
       key={props.type}
       label={props.type}
       avatar={<img src={`/assets/icons/${props.type.toLocaleLowerCase()}.svg`} />}
-      onClick={props.onClick}
+      onClick={() => navigate(`/pokedex?type1=${props.type}`)}
       clickable={false}
       sx={{
         backgroundColor: colorFromType(props.type as SingleType),

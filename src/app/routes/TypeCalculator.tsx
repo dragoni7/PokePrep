@@ -1,9 +1,7 @@
-import { RootState } from '@/store';
-import { TypeResults } from '@/types';
+import { SingleType, TypeResults } from '@/types';
 import { Grid2, Tooltip, Typography } from '@mui/material';
 import { HelpOutline } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import {
   getDefensiveTypes,
   getOffensiveTypes,
@@ -11,9 +9,10 @@ import {
 import TypeEffectivenessAccordion from '../../features/TypeCalculator/components/TypeEffectivenessAccordion';
 import Hero from '@/components/Hero';
 import TypeSelector from '@/features/TypeCalculator/components/TypeSelector';
+import { useSearchParams } from 'react-router-dom';
 
 export const TypeCalculator = () => {
-  const selectedTypes = useSelector((state: RootState) => state.typesConfig.type);
+  const [searchParams, _] = useSearchParams();
 
   const [bestDefense, setBestDefense] = useState<TypeResults>({
     0: [],
@@ -34,9 +33,14 @@ export const TypeCalculator = () => {
   });
 
   useEffect(() => {
+    const selectedTypes = searchParams.has('type1')
+      ? searchParams.has('type2')
+        ? [searchParams.get('type1') as SingleType, searchParams.get('type2') as SingleType]
+        : [searchParams.get('type1') as SingleType]
+      : [];
     setBestDefense(getDefensiveTypes(selectedTypes));
     setBestOffense(getOffensiveTypes(selectedTypes));
-  }, [selectedTypes]);
+  }, [searchParams]);
 
   return (
     <>

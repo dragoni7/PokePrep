@@ -1,6 +1,4 @@
 import TypeChip from '@/components/TypeChip';
-import { RootState } from '@/store';
-import { updateTypes } from '@/store/TypesReducer';
 import { SingleType } from '@/types';
 import { TYPES } from '@/util/types';
 import {
@@ -12,7 +10,7 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 
 const ITEM_HEIGHT = 64;
 const ITEM_PADDING_TOP = 8;
@@ -26,17 +24,32 @@ const MenuProps = {
 };
 
 export default function TypeSelector() {
-  const dispatch = useDispatch();
-  const selectedTypes = useSelector((state: RootState) => state.typesConfig.type);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  function handleChange(event: SelectChangeEvent<typeof selectedTypes>) {
+  function updateSearchParams(key: string, value: any) {
+    setSearchParams(() => {
+      if (value) {
+        searchParams.set(key, value);
+      } else {
+        searchParams.delete(key);
+      }
+
+      return searchParams;
+    });
+  }
+
+  function handleChange(event: SelectChangeEvent<SingleType[]>) {
     const {
       target: { value },
     } = event;
 
     if (value.length <= 2) {
       var types = typeof value === 'string' ? value.split(',') : value;
-      dispatch(updateTypes(types as SingleType[]));
+
+      updateSearchParams('type1', types[0] as SingleType);
+      updateSearchParams('type2', types[1] as SingleType);
+
+      if (searchParams.has('page')) updateSearchParams('page', 1);
     }
   }
   return (
@@ -46,7 +59,13 @@ export default function TypeSelector() {
         labelId="type-selector-label"
         id="type-selector"
         multiple
-        value={selectedTypes}
+        value={
+          searchParams.has('type1')
+            ? searchParams.has('type2')
+              ? [searchParams.get('type1') as SingleType, searchParams.get('type2') as SingleType]
+              : [searchParams.get('type1') as SingleType]
+            : []
+        }
         onChange={handleChange}
         input={<OutlinedInput id="select-multiple-chip" label="Type" />}
         renderValue={(selected) => (

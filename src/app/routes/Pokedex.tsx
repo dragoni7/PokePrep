@@ -89,7 +89,7 @@ export const Pokedex = () => {
         defaultPage={1}
         page={searchParams.get('page') ? Number(searchParams.get('page')) : 1}
         color="secondary"
-        onChange={(event: React.ChangeEvent<unknown>, value: number) =>
+        onChange={(_: React.ChangeEvent<unknown>, value: number) =>
           updateSearchParams('page', String(value))
         }
       />

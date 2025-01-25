@@ -16,7 +16,7 @@ export default function TypeEffectivenessAccordion(props: TypeEffectivenessAccor
     setExpanded(props.types.length > 0 ? props.label : false);
   }, [props.types]);
 
-  const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+  const handleChange = (panel: string) => (_: React.SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
   };
 

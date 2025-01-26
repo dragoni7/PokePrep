@@ -1,17 +1,16 @@
 import {
   Avatar,
   Backdrop,
-  Box,
   Card,
   CardContent,
   CardHeader,
-  CardMedia,
   Container,
   IconButton,
   Typography,
 } from '@mui/material';
 import { HighlightOff } from '@mui/icons-material';
 import { Pokemon } from '@/types';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 interface PokemonEntryProps {
   pokemon: Pokemon;
@@ -20,6 +19,7 @@ interface PokemonEntryProps {
 }
 
 export default function PokemonEntry(props: PokemonEntryProps) {
+  useHotkeys('esc', props.onClose);
   return (
     <Backdrop open={props.open} sx={{ pt: 10, pb: 4 }}>
       <Container
@@ -65,7 +65,11 @@ export default function PokemonEntry(props: PokemonEntryProps) {
           />
 
           <CardContent>
-            <img src={props.pokemon.icon} />
+            <img
+              src={props.pokemon.icon}
+              width="60%"
+              style={{ border: '3px solid yellow', borderRadius: 10 }}
+            />
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum molestias ipsam
               voluptatum optio officia assumenda ratione dignissimos a dicta praesentium totam

@@ -55,7 +55,9 @@ export default function TypeSelector() {
   }
   return (
     <FormControl>
-      <InputLabel id="type-selector-label">Type</InputLabel>
+      <InputLabel id="type-selector-label" sx={{ zIndex: 0 }}>
+        Type
+      </InputLabel>
       <Select
         labelId="type-selector-label"
         id="type-selector"
@@ -77,7 +79,7 @@ export default function TypeSelector() {
           </Box>
         )}
         MenuProps={MenuProps}
-        sx={{ width: '260px', height: '50px' }}
+        sx={{ width: '260px', height: '56px' }}
       >
         {TYPES.map((type) => (
           <MenuItem key={type} value={type}>

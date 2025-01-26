@@ -2,7 +2,7 @@ import TypeChip from '@/components/TypeChip';
 import PokemonEntry from '@/features/Pokemon/components/PokemonEntry';
 import TypeSelector from '@/features/Types/components/TypeSelector';
 import { Pokemon, SingleType } from '@/types';
-import { Box, Grid2, Pagination, Stack } from '@mui/material';
+import { Autocomplete, Box, Grid2, Pagination, Stack, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
@@ -44,23 +44,25 @@ export const Pokedex = () => {
   }, []);
 
   useEffect(() => {
+    var filtered = pokedex;
+
+    if (searchParams.has('name') && searchParams.get('name') !== null) {
+      filtered = Object.values(filtered).filter((p) => p.name.includes(searchParams.get('name')!));
+    }
+
     if (searchParams.has('type1') && searchParams.has('type2')) {
-      setFilteredDex(
-        Object.values(pokedex).filter(
-          (p) =>
-            p.types.includes(searchParams.get('type1') as SingleType) &&
-            p.types.includes(searchParams.get('type2') as SingleType)
-        )
+      filtered = Object.values(filtered).filter(
+        (p) =>
+          p.types.includes(searchParams.get('type1') as SingleType) &&
+          p.types.includes(searchParams.get('type2') as SingleType)
       );
     } else if (searchParams.has('type1')) {
-      setFilteredDex(
-        Object.values(pokedex).filter((p) =>
-          p.types.includes(searchParams.get('type1') as SingleType)
-        )
+      filtered = Object.values(filtered).filter((p) =>
+        p.types.includes(searchParams.get('type1') as SingleType)
       );
-    } else {
-      setFilteredDex(pokedex);
     }
+
+    setFilteredDex(filtered);
   }, [searchParams]);
 
   function updateSearchParams(key: string, value: any) {
@@ -82,7 +84,7 @@ export const Pokedex = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        pt: { xs: 7, sm: 10 },
+        pt: 10,
         pb: { xs: 4, sm: 6 },
         width: '100%',
       }}
@@ -96,14 +98,19 @@ export const Pokedex = () => {
           p: 1,
         })}
       >
-        <Stack direction="row" spacing={4} px={2}>
+        <Box gap={1} px={2} sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' } }}>
           <TypeSelector />
-          <div>options</div>
-          <div>options</div>
-          <div>options</div>
-          <div>options</div>
-          <div>options</div>
-        </Stack>
+          <Autocomplete
+            freeSolo
+            disablePortal
+            options={pokedex.map((pokemon) => pokemon.name)}
+            onInputChange={(_, newInputValue) => {
+              updateSearchParams('name', newInputValue);
+            }}
+            renderInput={(params) => <TextField {...params} label="Name" sx={{ zIndex: 0 }} />}
+            sx={{ width: '50%' }}
+          />
+        </Box>
       </Box>
       <Pagination
         count={Math.round(Object.values(filteredDex).length / ENTRIES_PER_PAGE)}

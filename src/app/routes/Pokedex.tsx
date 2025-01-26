@@ -106,6 +106,7 @@ export const Pokedex = () => {
             options={pokedex.map((pokemon) => pokemon.name)}
             onInputChange={(_, newInputValue) => {
               updateSearchParams('name', newInputValue);
+              updateSearchParams('page', 1);
             }}
             renderInput={(params) => <TextField {...params} label="Name" sx={{ zIndex: 0 }} />}
             sx={{ width: '50%' }}

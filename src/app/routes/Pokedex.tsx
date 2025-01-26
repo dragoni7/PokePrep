@@ -1,4 +1,5 @@
 import TypeChip from '@/components/TypeChip';
+import PokemonEntry from '@/features/Pokemon/components/PokemonEntry';
 import TypeSelector from '@/features/Types/components/TypeSelector';
 import { Pokemon, SingleType } from '@/types';
 import { Box, Grid2, Pagination, Stack } from '@mui/material';
@@ -11,6 +12,8 @@ export const Pokedex = () => {
   const [pokedex, setPokedex] = useState<Pokemon[]>([]);
   const [filteredDex, setFilteredDex] = useState<Pokemon[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [entryOpen, setEntryOpen] = useState<boolean>(false);
+  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | undefined>(undefined);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -137,6 +140,10 @@ export const Pokedex = () => {
             <Grid2
               size={{ xs: 4, md: 2 }}
               key={pokemon.name + pokemon.id}
+              onClick={() => {
+                setEntryOpen(true);
+                setSelectedPokemon(pokemon);
+              }}
               sx={(theme) => ({
                 backgroundColor: theme.palette.background.paper,
                 borderRadius: 5,
@@ -146,7 +153,7 @@ export const Pokedex = () => {
               })}
             >
               <Stack spacing={0.5} px={0.75} pb={0.5} alignItems="stretch">
-                <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+                <img src={pokemon.icon} alt={pokemon.name} />
                 {pokemon.name}
                 {pokemon.types[0] && <TypeChip type={pokemon.types[0]} />}
                 {pokemon.types[1] ? <TypeChip type={pokemon.types[1]} /> : false}
@@ -167,6 +174,13 @@ export const Pokedex = () => {
           marginBottom: 3,
         }}
       />
+      {selectedPokemon && (
+        <PokemonEntry
+          pokemon={selectedPokemon}
+          open={entryOpen}
+          onClose={() => setEntryOpen(false)}
+        />
+      )}
     </Box>
   );
 };

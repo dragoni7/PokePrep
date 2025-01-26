@@ -32,16 +32,7 @@ async function generatePokeDex(): Promise<Pokemon[]> {
         moves: [],
         name: pokemonData.name,
         species: pokemonData.species,
-        sprites: {
-          back_default: pokemonData.sprites.back_default,
-          back_female: pokemonData.sprites.back_female,
-          back_shiny: pokemonData.sprites.back_shiny,
-          back_shiny_female: pokemonData.sprites.back_shiny_female,
-          front_default: pokemonData.sprites.front_default,
-          front_female: pokemonData.sprites.front_female,
-          front_shiny: pokemonData.sprites.front_shiny,
-          front_shiny_female: pokemonData.sprites.front_shiny_female,
-        },
+        icon: pokemonData.sprites.other['official-artwork'].front_default,
         stats: {
           hp: pokemonData.stats[0].base_stat,
           attack: pokemonData.stats[1].base_stat,

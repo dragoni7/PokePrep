@@ -1,11 +1,9 @@
 import TypeChip from '@/components/TypeChip';
 import TypeSelector from '@/features/Types/components/TypeSelector';
 import { Pokemon, SingleType } from '@/types';
-import { Box, Collapse, Grid2, IconButton, Pagination, Stack } from '@mui/material';
+import { Box, Grid2, Pagination, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { FilterAlt } from '@mui/icons-material';
-import { Close } from '@mui/icons-material';
 
 const ENTRIES_PER_PAGE = 24;
 
@@ -13,7 +11,6 @@ export const Pokedex = () => {
   const [pokedex, setPokedex] = useState<Pokemon[]>([]);
   const [filteredDex, setFilteredDex] = useState<Pokemon[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [filterOpen, setFilterOpen] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -88,52 +85,29 @@ export const Pokedex = () => {
       }}
     >
       <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
+        sx={(theme) => ({
           width: '100%',
-          gap: 3,
-        }}
+          borderRadius: `calc(${theme.shape.borderRadius}px + 2px)`,
+          backgroundColor: theme.palette.primary.surface,
+          outline: '4px solid rgba(255, 255, 255, 0.1)',
+          p: 1,
+        })}
       >
-        <IconButton onClick={() => setFilterOpen((prev) => !prev)}>
-          {filterOpen ? (
-            <Close fontSize="large" color="secondary" />
-          ) : (
-            <FilterAlt fontSize="large" color="secondary" />
-          )}
-        </IconButton>
-        <Collapse in={filterOpen} orientation="horizontal">
-          <Box
-            sx={(theme) => ({
-              width: '100%',
-              borderRadius: `calc(${theme.shape.borderRadius}px + 2px)`,
-              backgroundColor: theme.palette.primary.surface,
-              outline: '4px solid rgba(255, 255, 255, 0.1)',
-              p: 1,
-            })}
-          >
-            <Stack direction="row" spacing={4} px={2}>
-              <TypeSelector />
-              <div>options</div>
-              <div>options</div>
-              <div>options</div>
-              <div>options</div>
-              <div>options</div>
-              <div>options</div>
-              <div>options</div>
-              <div>options</div>
-              <div>options</div>
-            </Stack>
-          </Box>
-        </Collapse>
+        <Stack direction="row" spacing={4} px={2}>
+          <TypeSelector />
+          <div>options</div>
+          <div>options</div>
+          <div>options</div>
+          <div>options</div>
+          <div>options</div>
+        </Stack>
       </Box>
       <Pagination
         count={Math.round(Object.values(filteredDex).length / ENTRIES_PER_PAGE)}
         defaultPage={1}
         page={searchParams.get('page') ? Number(searchParams.get('page')) : 1}
         color="secondary"
-        size="large"
+        size="medium"
         onChange={(_: React.ChangeEvent<unknown>, value: number) =>
           updateSearchParams('page', String(value))
         }
@@ -185,7 +159,7 @@ export const Pokedex = () => {
         defaultPage={1}
         page={searchParams.get('page') ? Number(searchParams.get('page')) : 1}
         color="secondary"
-        size="large"
+        size="medium"
         onChange={(_: React.ChangeEvent<unknown>, value: number) =>
           updateSearchParams('page', String(value))
         }

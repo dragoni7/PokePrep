@@ -76,6 +76,7 @@ export default function TypeSelector() {
           </Box>
         )}
         MenuProps={MenuProps}
+        sx={{ width: '260px', height: '50px' }}
       >
         {TYPES.map((type) => (
           <MenuItem key={type} value={type}>

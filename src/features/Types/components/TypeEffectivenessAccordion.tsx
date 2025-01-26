@@ -33,11 +33,11 @@ export default function TypeEffectivenessAccordion(props: TypeEffectivenessAccor
       <AccordionDetails>
         <Grid2
           container
-          spacing={{ xs: 1, md: 1.25 }}
+          spacing={1}
           sx={{
             maxHeight: { xs: '200px', md: '300px' },
-            overflowY: 'auto', // Enable vertical scrolling
-            overflowX: 'hidden', // Hide horizontal scrolling if not needed
+            overflowY: 'auto',
+            overflowX: 'hidden',
           }}
         >
           {props.types.map((entry) => (

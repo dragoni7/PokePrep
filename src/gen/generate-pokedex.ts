@@ -33,6 +33,7 @@ async function generatePokeDex(): Promise<Pokemon[]> {
         name: pokemonData.name,
         species: pokemonData.species,
         icon: pokemonData.sprites.other['official-artwork'].front_default,
+        shinyIcon: pokemonData.sprites.other['official-artwork'].front_shiny,
         stats: {
           hp: pokemonData.stats[0].base_stat,
           attack: pokemonData.stats[1].base_stat,

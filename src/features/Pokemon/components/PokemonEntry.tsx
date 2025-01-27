@@ -1,16 +1,21 @@
 import {
   Avatar,
   Backdrop,
+  Box,
   Card,
   CardContent,
   CardHeader,
   Container,
   IconButton,
+  Stack,
+  styled,
   Typography,
 } from '@mui/material';
 import { HighlightOff } from '@mui/icons-material';
 import { Pokemon } from '@/types';
 import { useHotkeys } from 'react-hotkeys-hook';
+import { useEffect, useState } from 'react';
+import StatsTable from './StatsTable';
 
 interface PokemonEntryProps {
   pokemon: Pokemon;
@@ -18,7 +23,26 @@ interface PokemonEntryProps {
   onClose: () => void;
 }
 
+const ShinyIcon = styled('img')({
+  background: 'rgba(0,0,0,0.3)',
+  borderRadius: '50%',
+  transition: 'all 0.3s ease',
+  cursor: 'pointer',
+  height: '25%',
+  width: 'auto',
+  '&:hover': {
+    transform: 'scale(1.1)',
+    background: 'rgba(0,0,0,0.5)',
+  },
+});
+
 export default function PokemonEntry(props: PokemonEntryProps) {
+  const [icon, setIcon] = useState<string>(props.pokemon.icon);
+
+  useEffect(() => {
+    setIcon(props.pokemon.icon);
+  }, [props]);
+
   useHotkeys('esc', props.onClose);
   return (
     <Backdrop open={props.open} sx={{ pt: 10, pb: 4 }}>
@@ -61,15 +85,52 @@ export default function PokemonEntry(props: PokemonEntryProps) {
                 <HighlightOff />
               </IconButton>
             }
-            title={<Typography variant="h6">{props.pokemon.name}</Typography>}
+            title={<Typography variant="h5">{props.pokemon.name}</Typography>}
           />
 
           <CardContent>
-            <img
-              src={props.pokemon.icon}
-              width="60%"
-              style={{ border: '3px solid yellow', borderRadius: 10 }}
-            />
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', sm: 'row' },
+                gap: 1,
+              }}
+            >
+              <Stack
+                sx={{
+                  alignItems: 'flex-end',
+                  border: '3px solid yellow',
+                  borderRadius: 10,
+                  width: { sx: '100%', sm: '60%' },
+                  p: 1.5,
+                }}
+              >
+                <img src={icon} width="100%" height="auto" />
+                <ShinyIcon
+                  src="/assets/icons/shiny.svg"
+                  onClick={() =>
+                    setIcon(
+                      icon === props.pokemon.icon ? props.pokemon.shinyIcon : props.pokemon.icon
+                    )
+                  }
+                />
+              </Stack>
+              <Stack
+                sx={{
+                  alignItems: 'center',
+                }}
+              >
+                <Typography variant="h6" sx={{ pt: 2, pb: 2 }}>
+                  Base Stats
+                </Typography>
+                <StatsTable stats={props.pokemon.stats} />
+                <Typography variant="h6" sx={{ pt: 2, pb: 2 }}>
+                  EVs
+                </Typography>
+                <StatsTable stats={props.pokemon.EV} />
+              </Stack>
+            </Box>
+
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum molestias ipsam
               voluptatum optio officia assumenda ratione dignissimos a dicta praesentium totam

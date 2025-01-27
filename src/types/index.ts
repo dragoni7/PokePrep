@@ -58,23 +58,19 @@ export type Pokemon = {
   name: string;
   species: any;
   icon: string;
-  stats: {
-    hp: number;
-    attack: number;
-    defense: number;
-    special_attack: number;
-    special_defense: number;
-    speed: number;
-  };
-  EV: {
-    hp: number;
-    attack: number;
-    defense: number;
-    special_attack: number;
-    special_defense: number;
-    speed: number;
-  };
+  shinyIcon: string;
+  stats: PokemonStats;
+  EV: PokemonStats;
   types: [SingleType, SingleType | undefined];
   weight: number;
   height: number;
+};
+
+export type PokemonStats = {
+  hp: number;
+  attack: number;
+  defense: number;
+  special_attack: number;
+  special_defense: number;
+  speed: number;
 };

@@ -16,6 +16,7 @@ import { Pokemon } from '@/types';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useEffect, useState } from 'react';
 import StatsTable from './StatsTable';
+import AbilitiesTable from './AbilitiesTable';
 
 interface PokemonEntryProps {
   pokemon: Pokemon;
@@ -28,7 +29,7 @@ const ShinyIcon = styled('img')({
   borderRadius: '50%',
   transition: 'all 0.3s ease',
   cursor: 'pointer',
-  height: '25%',
+  height: '20%',
   width: 'auto',
   '&:hover': {
     transform: 'scale(1.1)',
@@ -94,15 +95,17 @@ export default function PokemonEntry(props: PokemonEntryProps) {
                 display: 'flex',
                 flexDirection: { xs: 'column', sm: 'row' },
                 gap: 1,
+                marginBottom: 2,
               }}
             >
               <Stack
                 sx={{
                   alignItems: 'flex-end',
                   border: '3px solid yellow',
-                  borderRadius: 10,
-                  width: { sx: '100%', sm: '60%' },
-                  p: 1.5,
+                  borderRadius: 9,
+                  p: 1,
+                  height: '100%',
+                  width: '60%',
                 }}
               >
                 <img src={icon} width="100%" height="auto" />
@@ -118,23 +121,35 @@ export default function PokemonEntry(props: PokemonEntryProps) {
               <Stack
                 sx={{
                   alignItems: 'center',
+                  height: '100%',
+                  width: '50%',
                 }}
               >
-                <Typography variant="h6" sx={{ pt: 2, pb: 2 }}>
+                <Typography variant="h6" sx={{ pt: 1, pb: 1 }}>
                   Base Stats
                 </Typography>
                 <StatsTable stats={props.pokemon.stats} />
-                <Typography variant="h6" sx={{ pt: 2, pb: 2 }}>
+                <Typography variant="h6" sx={{ pt: 1, pb: 1 }}>
                   EVs
                 </Typography>
                 <StatsTable stats={props.pokemon.EV} />
+                <Typography variant="h6" sx={{ pt: 1, pb: 1 }}>
+                  Abilities
+                </Typography>
+                <AbilitiesTable abilities={props.pokemon.abilities} />
               </Stack>
             </Box>
 
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum molestias ipsam
               voluptatum optio officia assumenda ratione dignissimos a dicta praesentium totam
-              beatae architecto hic, ducimus autem quia iusto earum repellendus!
+              beatae architecto hic, ducimus autem quia iusto earum repellendus! Lorem ipsum dolor
+              sit amet, consectetur adipisicing elit. Cum molestias ipsam voluptatum optio officia
+              assumenda ratione dignissimos a dicta praesentium totam beatae architecto hic, ducimus
+              autem quia iusto earum repellendus! Lorem ipsum dolor sit amet, consectetur
+              adipisicing elit. Cum molestias ipsam voluptatum optio officia assumenda ratione
+              dignissimos a dicta praesentium totam beatae architecto hic, ducimus autem quia iusto
+              earum repellendus! Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             </Typography>
           </CardContent>
         </Card>

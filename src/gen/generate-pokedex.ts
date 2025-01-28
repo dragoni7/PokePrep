@@ -1,8 +1,50 @@
-import { Pokemon } from '@/types';
+import { AbilityDef, Pokemon, PokemonAbility } from '@/types';
 import { promises as fs } from 'fs';
 import path from 'path';
 
 const POKEMON_COUNT = 1025;
+const ABILITY_COUNT = 367;
+
+async function generatePokemonAbilities(): Promise<AbilityDef[]> {
+  var abilities: AbilityDef[] = [];
+
+  try {
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/ability?limit=${ABILITY_COUNT}&offset=0`
+    );
+    if (!response.ok) {
+      throw new Error('Error in fetching all abilities');
+    }
+
+    const data = await response.json();
+
+    for (const key in data.results) {
+      const abilityResponse = await fetch(data.results[key].url);
+      if (!abilityResponse.ok) {
+        throw new Error('Ability response error');
+      }
+
+      const abilityData = await abilityResponse.json();
+
+      abilities.push({
+        name: abilityData.name,
+        flavorText:
+          abilityData['flavor_text_entries'].findLast((e: any) => e.language.name === 'en')
+            ?.flavor_text || '',
+        description:
+          abilityData['effect_entries'].findLast((e: any) => e.language.name === 'en')?.effect ||
+          '',
+        pokemon: abilityData.pokemon.map((p: any): string => {
+          return p.pokemon.name;
+        }),
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+
+  return abilities;
+}
 
 async function generatePokeDex(): Promise<Pokemon[]> {
   var pokemon: Pokemon[] = [];
@@ -20,13 +62,15 @@ async function generatePokeDex(): Promise<Pokemon[]> {
     for (const key in data.results) {
       const pokemonResponse = await fetch(data.results[key].url);
       if (!pokemonResponse.ok) {
-        throw new Error('Response error');
+        throw new Error('Pokemno response error');
       }
 
       const pokemonData = await pokemonResponse.json();
 
       pokemon.push({
-        abilities: pokemonData.abilities,
+        abilities: pokemonData.abilities.map((entry: any): PokemonAbility => {
+          return { name: entry.ability.name, hidden: entry.is_hidden };
+        }),
         forms: pokemonData.forms,
         id: pokemonData.id,
         moves: [],
@@ -78,3 +122,19 @@ for (var i = 0; i < pokedex.length; i++) {
 fileData += '\n}';
 
 fs.writeFile(path.resolve(path.join(...['.', 'public', 'pokedex.json'])), fileData);
+
+/*-----------------------------------------------------------------------------------*/
+
+const abilities = await generatePokemonAbilities();
+
+var fileData = '{\n';
+
+for (var i = 0; i < abilities.length; i++) {
+  fileData += `\t"${abilities[i].name}":\n\t${JSON.stringify(abilities[i])}${
+    i + 1 === abilities.length ? '' : ','
+  }\n`;
+}
+
+fileData += '\n}';
+
+fs.writeFile(path.resolve(path.join(...['.', 'public', 'abilities.json'])), fileData);

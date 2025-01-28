@@ -51,7 +51,7 @@ export type TypeResults = {
 };
 
 export type Pokemon = {
-  abilities: any[];
+  abilities: PokemonAbility[];
   forms: any;
   id: number;
   moves: any[];
@@ -73,4 +73,16 @@ export type PokemonStats = {
   special_attack: number;
   special_defense: number;
   speed: number;
+};
+
+export type PokemonAbility = {
+  name: string;
+  hidden: boolean;
+};
+
+export type AbilityDef = {
+  name: string;
+  flavorText: string;
+  description: string;
+  pokemon: string[];
 };

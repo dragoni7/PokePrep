@@ -20,6 +20,7 @@ import AbilitiesTable from './AbilitiesTable';
 
 interface PokemonEntryProps {
   pokemon: Pokemon;
+  abilityData: any;
   open: boolean;
   onClose: () => void;
 }
@@ -136,7 +137,10 @@ export default function PokemonEntry(props: PokemonEntryProps) {
                 <Typography variant="h6" sx={{ pt: 1, pb: 1 }}>
                   Abilities
                 </Typography>
-                <AbilitiesTable abilities={props.pokemon.abilities} />
+                <AbilitiesTable
+                  pokemonAbilities={props.pokemon.abilities}
+                  abilityData={props.abilityData}
+                />
               </Stack>
             </Box>
 

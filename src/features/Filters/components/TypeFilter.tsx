@@ -10,7 +10,7 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-import { useSearchParams } from 'react-router-dom';
+import usePersistantSearchParams from '../hooks/usePersistantSearchParams';
 
 const ITEM_HEIGHT = 64;
 const ITEM_PADDING_TOP = 8;
@@ -24,20 +24,8 @@ const MenuProps = {
   },
 };
 
-export default function TypeSelector() {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  function updateSearchParams(key: string, value: any) {
-    setSearchParams(() => {
-      if (value) {
-        searchParams.set(key, value);
-      } else {
-        searchParams.delete(key);
-      }
-
-      return searchParams;
-    });
-  }
+export default function TypeFilter() {
+  const { searchParams, updateSearchParams } = usePersistantSearchParams();
 
   function handleChange(event: SelectChangeEvent<SingleType[]>) {
     const {

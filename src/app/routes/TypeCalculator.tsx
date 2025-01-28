@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { getDefensiveTypes, getOffensiveTypes } from '../../features/Types/util/type-utils';
 import TypeEffectivenessAccordion from '../../features/Types/components/TypeEffectivenessAccordion';
 import Hero from '@/components/Hero';
-import TypeSelector from '@/features/Types/components/TypeSelector';
+import TypeFilter from '@/features/Filters/components/TypeFilter';
 import { useSearchParams } from 'react-router-dom';
 
 export const TypeCalculator = () => {
@@ -42,7 +42,7 @@ export const TypeCalculator = () => {
   return (
     <>
       <Hero>
-        <TypeSelector />
+        <TypeFilter />
       </Hero>
       <Grid2
         container

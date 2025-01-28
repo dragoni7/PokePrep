@@ -3,7 +3,8 @@ import { Box, Tab, Tabs, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 interface AbilitiesTableProps {
-  abilities: PokemonAbility[];
+  pokemonAbilities: PokemonAbility[];
+  abilityData: any;
 }
 
 interface TabPanelProps {
@@ -30,18 +31,6 @@ function CustomTabPanel(props: TabPanelProps) {
 
 export default function AbilitiesTable(props: AbilitiesTableProps) {
   const [index, setIndex] = useState<number>(0);
-  const [abilityData, setAbilityData] = useState<any>({});
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('/abilities.json');
-      const jsonData = await response.json();
-      console.log(abilityData);
-      setAbilityData(jsonData);
-    };
-
-    fetchData();
-  }, []);
 
   useEffect(() => {
     setIndex(0);
@@ -63,7 +52,7 @@ export default function AbilitiesTable(props: AbilitiesTableProps) {
         indicatorColor="secondary"
         variant="fullWidth"
       >
-        {props.abilities.map((a) => (
+        {props.pokemonAbilities.map((a) => (
           <Tab
             label={a.name.replace('-', ' ')}
             sx={{
@@ -77,13 +66,19 @@ export default function AbilitiesTable(props: AbilitiesTableProps) {
         ))}
       </Tabs>
       <CustomTabPanel value={index} index={0}>
-        <Typography variant="body1">{abilityData[props.abilities[0]?.name]?.flavorText}</Typography>
+        <Typography variant="body1">
+          {props.abilityData[props.pokemonAbilities[0]?.name]?.flavorText}
+        </Typography>
       </CustomTabPanel>
       <CustomTabPanel value={index} index={1}>
-        <Typography variant="body1">{abilityData[props.abilities[1]?.name]?.flavorText}</Typography>
+        <Typography variant="body1">
+          {props.abilityData[props.pokemonAbilities[1]?.name]?.flavorText}
+        </Typography>
       </CustomTabPanel>
       <CustomTabPanel value={index} index={2}>
-        <Typography variant="body1">{abilityData[props.abilities[2]?.name]?.flavorText}</Typography>
+        <Typography variant="body1">
+          {props.abilityData[props.pokemonAbilities[2]?.name]?.flavorText}
+        </Typography>
       </CustomTabPanel>
     </Box>
   );

@@ -1,69 +1,25 @@
 import TypeChip from '@/components/TypeChip';
+import useFilteredPokedex from '@/features/Filters/hooks/useFilteredPokedex';
 import PokemonEntry from '@/features/Pokemon/components/PokemonEntry';
-import TypeSelector from '@/features/Types/components/TypeSelector';
-import { Pokemon, SingleType } from '@/types';
-import { Autocomplete, Box, Grid2, Pagination, Stack, TextField } from '@mui/material';
-import { useEffect, useState } from 'react';
+import useAbilities from '@/features/Pokemon/hooks/useAbilities';
+import usePokedex from '@/features/Pokemon/hooks/usePokedex';
+import TypeFilter from '@/features/Filters/components/TypeFilter';
+import { Pokemon } from '@/types';
+import { Box, Grid2, Pagination, Stack } from '@mui/material';
+import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import NameFilter from '@/features/Filters/components/NameFilter';
+import AbilityFilter from '@/features/Filters/components/AbilityFilter';
 
 const ENTRIES_PER_PAGE = 24;
 
 export const Pokedex = () => {
-  const [pokedex, setPokedex] = useState<Pokemon[]>([]);
-  const [filteredDex, setFilteredDex] = useState<Pokemon[]>([]);
+  const pokedex = usePokedex();
+  const filteredDex = useFilteredPokedex(pokedex);
+  const abilityData = useAbilities();
   const [searchParams, setSearchParams] = useSearchParams();
   const [entryOpen, setEntryOpen] = useState<boolean>(false);
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | undefined>(undefined);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('/pokedex.json');
-      const jsonData = await response.json();
-      setPokedex(Object.values<Pokemon>(jsonData));
-
-      if (searchParams.has('type1') && searchParams.has('type2')) {
-        setFilteredDex(
-          Object.values<Pokemon>(jsonData).filter(
-            (p) =>
-              p.types.includes(searchParams.get('type1') as SingleType) &&
-              p.types.includes(searchParams.get('type2') as SingleType)
-          )
-        );
-      } else if (searchParams.has('type1')) {
-        setFilteredDex(
-          Object.values<Pokemon>(jsonData).filter((p: any) =>
-            p.types.includes(searchParams.get('type1') as SingleType)
-          )
-        );
-      } else {
-        setFilteredDex(Object.values<Pokemon>(jsonData));
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    var filtered = pokedex;
-
-    if (searchParams.has('name') && searchParams.get('name') !== null) {
-      filtered = Object.values(filtered).filter((p) => p.name.includes(searchParams.get('name')!));
-    }
-
-    if (searchParams.has('type1') && searchParams.has('type2')) {
-      filtered = Object.values(filtered).filter(
-        (p) =>
-          p.types.includes(searchParams.get('type1') as SingleType) &&
-          p.types.includes(searchParams.get('type2') as SingleType)
-      );
-    } else if (searchParams.has('type1')) {
-      filtered = Object.values(filtered).filter((p) =>
-        p.types.includes(searchParams.get('type1') as SingleType)
-      );
-    }
-
-    setFilteredDex(filtered);
-  }, [searchParams]);
 
   function updateSearchParams(key: string, value: any) {
     setSearchParams(() => {
@@ -99,18 +55,9 @@ export const Pokedex = () => {
         })}
       >
         <Box gap={1} px={2} sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' } }}>
-          <TypeSelector />
-          <Autocomplete
-            freeSolo
-            disablePortal
-            options={pokedex.map((pokemon) => pokemon.name)}
-            onInputChange={(_, newInputValue) => {
-              updateSearchParams('name', newInputValue);
-              updateSearchParams('page', 1);
-            }}
-            renderInput={(params) => <TextField {...params} label="Name" sx={{ zIndex: 0 }} />}
-            sx={{ width: '50%' }}
-          />
+          <TypeFilter />
+          <NameFilter pokedex={pokedex} />
+          <AbilityFilter abilityData={abilityData} />
         </Box>
       </Box>
       <Pagination
@@ -185,6 +132,7 @@ export const Pokedex = () => {
       {selectedPokemon && (
         <PokemonEntry
           pokemon={selectedPokemon}
+          abilityData={abilityData}
           open={entryOpen}
           onClose={() => setEntryOpen(false)}
         />

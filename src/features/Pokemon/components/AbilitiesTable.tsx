@@ -1,10 +1,10 @@
-import { PokemonAbility } from '@/types';
+import { AbilityDef, PokemonAbility } from '@/types';
 import { Box, Tab, Tabs, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 interface AbilitiesTableProps {
   pokemonAbilities: PokemonAbility[];
-  abilityData: any;
+  abilityData: AbilityDef[];
 }
 
 interface TabPanelProps {
@@ -67,17 +67,17 @@ export default function AbilitiesTable(props: AbilitiesTableProps) {
       </Tabs>
       <CustomTabPanel value={index} index={0}>
         <Typography variant="body1">
-          {props.abilityData[props.pokemonAbilities[0]?.name]?.flavorText}
+          {props.abilityData.find((p) => p.name === props.pokemonAbilities[0]?.name)?.flavorText}
         </Typography>
       </CustomTabPanel>
       <CustomTabPanel value={index} index={1}>
         <Typography variant="body1">
-          {props.abilityData[props.pokemonAbilities[1]?.name]?.flavorText}
+          {props.abilityData.find((p) => p.name === props.pokemonAbilities[1]?.name)?.flavorText}
         </Typography>
       </CustomTabPanel>
       <CustomTabPanel value={index} index={2}>
         <Typography variant="body1">
-          {props.abilityData[props.pokemonAbilities[2]?.name]?.flavorText}
+          {props.abilityData.find((p) => p.name === props.pokemonAbilities[2]?.name)?.flavorText}
         </Typography>
       </CustomTabPanel>
     </Box>

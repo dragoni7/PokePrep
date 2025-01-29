@@ -7,14 +7,14 @@ interface NameFilterProps {
 }
 
 export default function NameFilter(props: NameFilterProps) {
-  const { searchParams, updateSearchParams } = usePersistantSearchParams();
+  const { updateSearchParams } = usePersistantSearchParams();
 
   return (
     <Autocomplete
       freeSolo
       disablePortal
       options={props.pokedex.map((pokemon) => pokemon.name)}
-      renderOption={(props, option, state, ownerState) => (
+      renderOption={(props, option) => (
         <li {...props}>
           <div style={{ textTransform: 'capitalize' }}>{option.replace('-', ' ')}</div>
         </li>

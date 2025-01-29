@@ -6,14 +6,14 @@ interface AbilityFilterProps {
   abilityData: AbilityDef[];
 }
 export default function AbilityFilter(props: AbilityFilterProps) {
-  const { searchParams, updateSearchParams } = usePersistantSearchParams();
+  const { updateSearchParams } = usePersistantSearchParams();
 
   return (
     <Autocomplete
       freeSolo
       disablePortal
       options={props.abilityData.map((a: AbilityDef) => a.name)}
-      renderOption={(props, option, state, ownerState) => (
+      renderOption={(props, option) => (
         <li {...props}>
           <div style={{ textTransform: 'capitalize' }}>{option.replace('-', ' ')}</div>
         </li>

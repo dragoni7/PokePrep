@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 
 export default function useFilteredPokedex(pokedex: Pokemon[]) {
   const [filteredDex, setFilteredDex] = useState<Pokemon[]>(pokedex);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     setFilteredDex(filterDex(pokedex));

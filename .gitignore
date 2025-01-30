@@ -26,3 +26,4 @@ dist-ssr
 # large generated data
 public/pokedex.json
 public/abilities.json
+public/moves.json

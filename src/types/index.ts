@@ -54,7 +54,21 @@ export type Pokemon = {
   abilities: PokemonAbility[];
   forms: any;
   id: number;
-  moves: any[];
+  moves: {
+    name: string;
+    versionGroupDetails: {
+      levelLearned: number;
+      learnMethod:
+        | 'machine'
+        | 'level-up'
+        | 'egg'
+        | 'tutor'
+        | 'light-ball-egg'
+        | 'form-change'
+        | 'zygarde-cube';
+      versionGroup: string;
+    }[];
+  }[];
   name: string;
   species: any;
   icon: string;
@@ -84,5 +98,44 @@ export type AbilityDef = {
   name: string;
   flavorText: string;
   description: string;
+  pokemon: string[];
+};
+
+export type MoveDef = {
+  name: string;
+  flavorText: string;
+  ailment: string;
+  ailmentChance: number;
+  moveCategory:
+    | 'damage'
+    | 'ailment'
+    | 'net-good-stats'
+    | 'heal'
+    | 'damage+ailment'
+    | 'swagger'
+    | 'damage+lower'
+    | 'damage+raise'
+    | 'damage+heal'
+    | 'ohko'
+    | 'whole-field-effect'
+    | 'field-effect'
+    | 'force-switch'
+    | 'unique'
+    | null;
+  accuracy: number | null;
+  power: number | null;
+  pp: number;
+  priority: number;
+  critRate: number;
+  drain: number;
+  flinchChange: number;
+  healing: number;
+  maxHits: number | null;
+  maxTurns: number | null;
+  minHits: number | null;
+  minTurns: number | null;
+  statChance: number;
+  damageClass: 'status' | 'physical' | 'special';
+  type: SingleType;
   pokemon: string[];
 };

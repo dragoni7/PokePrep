@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run pokedex && tsc -b && vite build",
-    "generate": "npx tsx src/gen/generate-types.ts",
+    "generate-types": "npx tsx src/gen/generate-types.ts",
     "pokedex": "npx tsx src/gen/generate-pokedex.ts",
     "lint": "eslint .",
     "preview": "vite preview"

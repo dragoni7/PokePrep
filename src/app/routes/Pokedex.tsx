@@ -10,6 +10,8 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import NameFilter from '@/features/Filters/components/NameFilter';
 import AbilityFilter from '@/features/Filters/components/AbilityFilter';
+import MoveFilter from '@/features/Filters/components/MoveFilter';
+import useMoves from '@/features/Pokemon/hooks/useMoves';
 
 const ENTRIES_PER_PAGE = 24;
 
@@ -17,6 +19,7 @@ export const Pokedex = () => {
   const pokedex = usePokedex();
   const filteredDex = useFilteredPokedex(pokedex);
   const abilityData = useAbilities();
+  const moveData = useMoves();
   const [searchParams, setSearchParams] = useSearchParams();
   const [entryOpen, setEntryOpen] = useState<boolean>(false);
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | undefined>(undefined);
@@ -58,6 +61,7 @@ export const Pokedex = () => {
           <TypeFilter />
           <NameFilter pokedex={pokedex} />
           <AbilityFilter abilityData={abilityData} />
+          <MoveFilter moveData={moveData} />
         </Box>
       </Box>
       <Pagination

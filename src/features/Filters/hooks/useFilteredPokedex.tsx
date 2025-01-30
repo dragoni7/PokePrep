@@ -39,6 +39,10 @@ export default function useFilteredPokedex(pokedex: Pokemon[]) {
       );
     }
 
+    if (searchParams.has('move') && searchParams.get('move') !== null) {
+      filtered = filtered.filter((p) => p.moves.some((p) => p.name === searchParams.get('move')));
+    }
+
     return filtered;
   }
 
